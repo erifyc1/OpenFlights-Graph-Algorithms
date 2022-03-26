@@ -1,4 +1,4 @@
-##Leading Question
+## Leading Question
 - We seek to create a search tool that can give various routes between given airports. This would include the least number of stops as well as connecting using only a specific set of airlines. Time permitting, we also want to visualize how certain airport networks are connected across multiple states, countries, or continents as well as visualizing airport networks for certain sets of airlines. 
 ## Dataset Acquisition and Processing
 
@@ -20,23 +20,25 @@
 # Dijkstra’s algorithm 
 - The input will be the departure airport and destination airport, as well as preferred airlines. The output will be the shortest path between the 2 nodes. The Theoretical time complexity should be O(|V|^2) in the worst case depending on the exact implementation.
 # PageRank (centrality algorithm) 
-- We will implement the PageRank algorithm to determine the most central airports, or the probability of ending up at a given airport by taking random flights. In order to do this, we will use the convergence of the probabilities of a Markov matrix. The time complexity is O(K*N), K = number of iterations, N = space requirement, so (K*airlines*airports^2). The space complexity is O(airlines*airports^2).
+- We will implement the PageRank algorithm to determine the most central airports, or the probability of ending up at a given airport by taking random flights. In order to do this, we will use the convergence of the probabilities of a Markov matrix. 
+- The time complexity is O(K*N), K = number of iterations, N = space requirement, so (K*airlines*airports^2). 
+- The space complexity is O(airlines*airports^2).
 
-All of these will be used to find traversals between certain nodes of the directed graph of flights. 
-We will also print out the amount of time that each of the functions take to figure out which algorithm is preferred. 
+- All of these will be used to find traversals between certain nodes of the directed graph of flights. 
+- We will also print out the amount of time that each of the functions take to figure out which algorithm is preferred. 
 
 ## Timeline
 - Mid-Project deadline: April 15th (3 weeks until)
-#First week - April 2nd
+# First week - April 2nd
 - Data acquisition: find dataset
 - Data storage and processing: implement a method of storing and retrieving the data
-#Second week - April 8th
+# Second week - April 8th
 - Data processing: Implement a method for converting the retrieved data into a graph
 - Implement either the BFS or DFS algorithm (whichever we decide)
-#Third week - April 15th
+# Third week - April 15th
 - Complete Dijkstra’s algorithm
 
-#Before May 6th
+# Before May 6th
 - Complete PageRank algorithm
 - Complete visualization
  
