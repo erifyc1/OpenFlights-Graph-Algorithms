@@ -20,7 +20,7 @@
 
 ## Time Commitment:
 
-- Each member is expected to work from 2-6 hours per week. If the amont of work required of one member happens to increase beyond 6 hours, we will split the extra work evenly, with every member being responsible for the increase, rather than the individual who initially had it as their work.
+- Each member is expected to work from 2-6 hours per week. If the amount of work required of one member happens to increase beyond 6 hours, we will split the extra work evenly, with every member being responsible for the increase, rather than the individual who initially had it as their work.
 
 ## Conflict Resolution
 
