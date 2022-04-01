@@ -11,7 +11,7 @@
   The worst case space complexity usage for the map data structure is O(airlines * airports^2 ).
 
 # Graph Algorithms
-##BFS 
+## BFS 
 - Inputs: startNode, endNode
 - Output: vector of nodes in path (empty if path does not exist)
 - Theoretical time complexity O(V + E)
