@@ -1,5 +1,6 @@
-#include <vector>
 #pragma once
+
+#include <vector>
 
 class Airport {
     public:
@@ -14,4 +15,4 @@ class Airport {
 
 
 
-}
+};
