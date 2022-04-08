@@ -1,17 +1,29 @@
 #pragma once
 
 #include <vector>
+#include <string>
+#include <fstream>
+#include <map>
+#include <istream>
+#include <iostream>
+#include <ostream>
+#include <stdexcept>
 
+using namespace std;
 class Airport {
     public:
-        Airport(std::string code);
-        Airport(int unique_id_);
-        Airport(std::string code, int unique_id_);
-        Airport(std::string code, Airport* destination);
+        Airport(string codeName);
+        Airport(int uniqueID);
+        Airport(string codeName, int uniqueID);
+        Airport(string codeName, int uniqueID, string destination);
+        void addDestination(string dest);
+        vector<string>& getDestinations();
+        string getCode();
+        int getID();
     private:
-        std::string code_;
+        string code_;
         int unique_id_;
-        std::vector<Airport*> destinations;
+        vector<string> destinations;
 
 
 
