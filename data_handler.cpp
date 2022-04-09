@@ -39,7 +39,7 @@ void DataHandler::readInCSV(const std::string& filename) {
         }
 
         string source = delimited.at(2);
-        pair<string,string> destination = (delimited.at(0), delimited.at(4));
+        pair<string,string> destination = {delimited.at(0), delimited.at(4)};
 
         // id may not be a valid integer (bad data)
         int id;

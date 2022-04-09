@@ -1,5 +1,4 @@
 #pragma once
-#include <pair>
 #include <vector>
 #include <string>
 #include <fstream>
@@ -15,9 +14,9 @@ class Airport {
         Airport(string codeName);
         Airport(int uniqueID);
         Airport(string codeName, int uniqueID);
-        Airport(string codeName, int uniqueID, string destination);
-        void addDestination(string dest);
-        vector<string>& getDestinations();
+        Airport(string codeName, int uniqueID, pair<string,string> destination);
+        void addDestination(pair<string,string> dest);
+        vector<pair<string,string>>& getDestinations();
         string getCode();
         int getID();
     private:
