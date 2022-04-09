@@ -1,5 +1,5 @@
 #pragma once
-
+#include <pair>
 #include <vector>
 #include <string>
 #include <fstream>
@@ -23,7 +23,7 @@ class Airport {
     private:
         string code_;
         int unique_id_;
-        vector<string> destinations;
+        vector<pair<string,string>> destinations;
 
 
 

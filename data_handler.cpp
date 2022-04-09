@@ -39,7 +39,7 @@ void DataHandler::readInCSV(const std::string& filename) {
         }
 
         string source = delimited.at(2);
-        string destination = delimited.at(4);
+        pair<string,string> destination = (delimited.at(0), delimited.at(4));
 
         // id may not be a valid integer (bad data)
         int id;
@@ -104,8 +104,8 @@ void DataHandler::writeMapToFile(const string& filename) {
 
     for (pair<string, Airport*> p : airports) {
         ofs << p.first << ">";
-        for (string dest : p.second->getDestinations()) {
-            ofs << dest << ",";
+        for (pair<string,string> dest : p.second->getDestinations()) {
+            ofs << "("<< dest.first << "," << dest.second << "),";
         }
         ofs << "\n";
     }
