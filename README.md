@@ -1,2 +1,6 @@
-# aelys2-stolker2-efcoats2
-Final project for team: minigamerways
+# MiniGamerWays
+### CS225 Final Project
+- Andrew Elysee (aelys2)
+- Evan Coats (efcoats2)
+- Jacob Stolker (stolker2)
+
