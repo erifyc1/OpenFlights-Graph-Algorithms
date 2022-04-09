@@ -18,6 +18,7 @@ class Airport {
         Airport(string codeName, int uniqueID, string destination);
         void addDestination(string dest);
         vector<string>& getDestinations();
+        vector<string>& getArrivals(map<string, Airport*> m);
         string getCode();
         int getID();
     private:

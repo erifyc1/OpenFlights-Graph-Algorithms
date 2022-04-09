@@ -16,5 +16,20 @@ void Airport::addDestination(pair<string,string> dest) {
 }
 
 vector<parir<string,string>>& Airport::getDestinations() { return destinations; }
+
+vector<string>& AirPort::getArrivals(map<string, Airport*> m){
+    std::vector<std::pair<string,string>>& arrivals; 
+
+    map<string, Airport*> ::iterator it;
+    for (it = m.begin(); it != m.end(); it++){
+        std::vector<std::pair<string,string>>& destinations = it -> getDestinations();
+        for (int x = 0; x < destinations.size(); x++ ){
+            if (destinations.at(i).first() == getCode() && destinations.at(i).second() == getID()){
+                arrivals.push_back(pair(destinations -> getCode(), destinations -> getID()));
+            }
+        }
+    }
+}
+
 string Airport::getCode() { return code_; }
 int Airport::getID() { return unique_id_; }
