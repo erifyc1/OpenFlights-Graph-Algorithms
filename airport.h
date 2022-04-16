@@ -1,12 +1,5 @@
 #pragma once
-#include <vector>
-#include <string>
-#include <fstream>
-#include <map>
-#include <istream>
-#include <iostream>
-#include <ostream>
-#include <stdexcept>
+#include "utils.h"
 
 using namespace std;
 class Airport {

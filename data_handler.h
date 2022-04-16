@@ -1,6 +1,7 @@
 #pragma once
 
 #include "airport.h"
+#include "utils.h"
 
 
 class DataHandler {
@@ -18,11 +19,7 @@ class DataHandler {
         void readInCSV(const std::string& filename);
 
         // helper function to read in flight data from given .txt
-        // not finished yet
         void readInCompressed(const std::string& filename);
-
-        // helper function to separate a line into a vector by delim
-        vector<string> delimitLine(const string line, const char delim);
 
         // method to write existing map data into compressed .txt file
         void writeMapToFile(const string& filename);

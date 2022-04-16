@@ -32,7 +32,7 @@ void DataHandler::readInCSV(const std::string& filename) {
         count++;
 
         getline(ifs, line);
-        vector<string> delimited = delimitLine(line, ',');
+        vector<string> delimited = utils::delimitLine(line, ',');
         if (delimited.size() <= 1) {
             cout << "100%" << endl;
             return;
@@ -58,43 +58,43 @@ void DataHandler::readInCSV(const std::string& filename) {
 }
 
 // reads in compressed version of flight data WORK IN PROGRESS
-/*
-void readInCompressed(const std::string& filename) {
-    ifstream ifs(filename);
-    string line;
 
-    unsigned int count = 0;
-    // read in entries
-    while (ifs.good()) {
-        if (count % 34 == 0) {
-            cout << static_cast<double>(count)/34 << "%" << endl;
-        }
-        count++;
+// void readInCompressed(const std::string& filename) {
+//     ifstream ifs(filename);
+//     string line;
 
-        getline(ifs, line);
-        vector<string> initial = delimitLine(line, '>');
-        if (initial.size() <= 1) {
-            cout << "100%" << endl;
-            return;
-        }
+//     unsigned int count = 0;
+//     // read in entries
+//     while (ifs.good()) {
+//         if (count % 34 == 0) {
+//             cout << static_cast<double>(count)/34 << "%" << endl;
+//         }
+//         count++;
 
-        string source = initial.at(0);
-        vector<string> destinations = delimitLine(initial.at(1), ',');
+//         getline(ifs, line);
+//         vector<string> initial = delimitLine(line, '>');
+//         if (initial.size() <= 1) {
+//             cout << "100%" << endl;
+//             return;
+//         }
+
+//         string source = initial.at(0);
+//         vector<string> destinations = delimitLine(initial.at(1), ',');
 
 
-        int id;
-        try { id = stoi(delimited.at(3)); }
-        catch(std::invalid_argument& e) { id = -1; }
+//         int id;
+//         try { id = stoi(delimited.at(3)); }
+//         catch(std::invalid_argument& e) { id = -1; }
 
-        if (airports.find(source) == airports.end()) {
-            airports.insert(pair<string, Airport*>(source, new Airport(source, id, destination)));
-        }
-        else {
-            airports.at(source)->addDestination(destination);
-        }
-    }
-}
-*/
+//         if (airports.find(source) == airports.end()) {
+//             airports.insert(pair<string, Airport*>(source, new Airport(source, id, destination)));
+//         }
+//         else {
+//             airports.at(source)->addDestination(destination);
+//         }
+//     }
+// }
+
 
 // writes each airport and its destinations to a file
 // format: ABL>OTZ,SHG,OTZ,SHG,
@@ -105,7 +105,7 @@ void DataHandler::writeMapToFile(const string& filename) {
     for (pair<string, Airport*> p : airports) {
         ofs << p.first << ">";
         for (pair<string,string> dest : p.second->getDestinations()) {
-            ofs << "("<< dest.first << "," << dest.second << "),";
+            ofs << "("<< dest.first << "|" << dest.second << "),";
         }
         ofs << "\n";
     }
@@ -121,20 +121,4 @@ DataHandler::~DataHandler() {
             p.second = NULL;
         }
     }
-}
-
-// takes a line of the csv and separates each value into a vector
-vector<string> DataHandler::delimitLine(const string line, const char delim) {
-    vector<string> separated;
-    separated.push_back("");
-    // checks each character and either adds a new elements to vector or adds the character to the last element
-    for (char c : line) {
-        if (c == delim) {
-            separated.push_back("");
-        }
-        else {
-            separated.back() += c;
-        }
-    }
-    return separated;
 }
