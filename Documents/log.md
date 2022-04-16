@@ -33,3 +33,19 @@
 - We also hope to begin converting our data into a graph.
 - We hope to mostly, if not completely finish our BFS traversal.
 - We hope to get started on PageRank.
+---
+
+## Week 3
+### Goals
+- This week we wanted to complete our BFS traversal of the dataset as well as begin working on our PageRank algorithm.
+- Due to backups in previous weeks we were unable to be exactly where we wanted to be in our original schedule which is fine since it was overly optimistic. This week was also quite slow due to midterms piling up but we plan on making up for this over the weekend before the mid-project check-in. 
+### Member Specific Tasks
+- Andrew (me) started on BFS algorithm (once again should be completed by the meeting)
+- Jacob was unable to work on the project during week but will make up for this over the weekend.
+- Evan is working on Arrivals function which will later be used in PageRank.
+### Problems
+- We all had midterms this week. But, we will make up for any lost progress over the weekend in preparation for the Mid-Project meeting
+### NEXT WEEK
+- Work on the actual PageRank algorithm.
+- Start working on Dijkstra’s
+
