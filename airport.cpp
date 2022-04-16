@@ -15,25 +15,25 @@ void Airport::addDestination(pair<string,string> dest) {
     destinations.push_back(dest);
 }
 
-<<<<<<< HEAD
 vector<pair<string,string>>& Airport::getDestinations() { return destinations; }
-=======
-vector<parir<string,string>>& Airport::getDestinations() { return destinations; }
 
-vector<string>& AirPort::getArrivals(map<string, Airport*> m){
-    std::vector<std::pair<string,string>>& arrivals; 
+vector<pair<string,string>> Airport::getArrivals(map<string, Airport*> m){
+    std::vector<std::pair<string,string>> arrivals; 
 
     map<string, Airport*> ::iterator it;
     for (it = m.begin(); it != m.end(); it++){
-        std::vector<std::pair<string,string>>& destinations = it -> getDestinations();
-        for (int x = 0; x < destinations.size(); x++ ){
-            if (destinations.at(i).first() == getCode() && destinations.at(i).second() == getID()){
-                arrivals.push_back(pair(destinations -> getCode(), destinations -> getID()));
+        std::vector<std::pair<string,string>>& destinations = it->second->getDestinations();
+        for (size_t x = 0; x < destinations.size(); x++ ){
+            int id;
+            try { id = stoi(destinations.at(x).second); }
+            catch(std::invalid_argument& e) { id = -1; }
+            if (destinations.at(x).first == getCode() && id == getID()){
+                arrivals.push_back(pair<string,string>(destinations.at(x).first, to_string(id)));
             }
         }
     }
+    return arrivals;
 }
 
->>>>>>> 6065990ba285bd4101262ee752b7ad05c52d2b33
 string Airport::getCode() { return code_; }
 int Airport::getID() { return unique_id_; }

@@ -19,7 +19,7 @@ class DataHandler {
 
         // helper function to read in flight data from given .txt
         // not finished yet
-        // void readInCompressed(const std::string& filename);
+        void readInCompressed(const std::string& filename);
 
         // helper function to separate a line into a vector by delim
         vector<string> delimitLine(const string line, const char delim);
