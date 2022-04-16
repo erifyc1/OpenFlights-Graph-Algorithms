@@ -27,3 +27,26 @@ vector<string> utils::delimitLine(const string line, const vector<char>& delims)
     }
     return separated;
 }
+
+
+string utils::removeChar(const string line, const char c) {
+    const vector<char> chars = { c };
+    return removeChar(line, chars);
+}
+
+string utils::removeChar(const string line, const vector<char>& cs) {
+    string output;
+    for (const char& c : line) {
+        bool foundDelim = false;
+        for (const char& ch : cs) {
+            if (c == ch) {
+                foundDelim = true;
+                break;
+            }
+        }
+        if (!foundDelim) {
+            output += c;
+        }
+    }
+    return output;
+}

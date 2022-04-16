@@ -6,20 +6,38 @@ using namespace std;
 int main(int argc, char** argv) {
     // import data
     if (argc == 2 && argv[1][0] == 'c' && argv[1][1] == 's' && argv[1][2] == 'v') {
-        const string s = "./data/routes.csv";
-        DataHandler d(s, true);
-        cout << "constructed map" << endl;
-        d.writeMapToFile("./data/compressed.txt");
-        cout << "done" << endl;
+
+        const string input = "./data/routes.csv";
+        const string output = "./data/compressed.txt";
+
+        // read data from csv file
+        DataHandler d(input, true);
+        cout << "successfully read from " << input << endl;
+
+        // write data to compressed file
+        d.writeMapToFile(output);
+        cout << "successfully written to " << output << endl;
     }
     else {
-        cout << "usage: " << argv[0] << " csv" << endl;
-        cout << "compressed file read is not implemented yet" << endl;
-        // will add read in compressed file here
-        // not ready yet
+
+        const string input = "./data/compressed.txt";
+        const string output = "./data/compressed_twice.txt";
+
+        // read data from compressed file
+        DataHandler d(input);
+        cout << "successfully read from " << input << endl;
+
+        // write data to another compressed file
+        // to test if this works, run "diff ./data/compressed.txt ./data/compressed_twice.txt"
+        // if there is no output, the files match (and they should)
+        d.writeMapToFile(output);
+        cout << "successfully written to " << output << endl;
     }
-    // more code testing here
-    // VVVVVVVVVVVVVVVVVVVVVV
+    /*
+
+    test further functions below
+    VVVVVVVVVVVVVVVVVVVVVVVVVVVV
+    */
 
 
     return 0;
