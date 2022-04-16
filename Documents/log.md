@@ -38,7 +38,7 @@
 ## Week 3
 ### Goals
 - This week we wanted to complete our BFS traversal of the dataset as well as begin working on our PageRank algorithm.
-- Due to backups in previous weeks we were unable to be exactly where we wanted to be in our original schedule which is fine since it was overly optimistic. This week was also quite slow due to midterms piling up but we plan on making up for this over the weekend before the mid-project check-in. 
+- Due to backups in previous weeks we were unable to be exactly where we wanted to be in our original schedule which is fine since it was overly optimistic. This week was also quite slow due to midterms piling up but we plan on making up for this over the weekend before the mid-project check-in. Does the weekend count as part of the week? If it does then all progress promised should be made.
 ### Member Specific Tasks
 - Andrew (me) started on BFS algorithm (once again should be completed by the meeting)
 - Jacob was unable to work on the project during week but will make up for this over the weekend.
