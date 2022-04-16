@@ -41,7 +41,7 @@
 - Due to backups in previous weeks we were unable to be exactly where we wanted to be in our original schedule which is fine since it was overly optimistic. This week was also quite slow due to midterms piling up but we plan on making up for this over the weekend before the mid-project check-in. Does the weekend count as part of the week? If it does then all progress promised should be made.
 ### Member Specific Tasks
 - Andrew started on BFS algorithm (once again should be completed by the meeting)
-- Jacob was working on retrieving data from the compressed.txt file, so all future code runs can depends on this efficiently stored information.
+- Jacob worked on retrieving data from the compressed.txt file, so all future code runs can depends on this efficiently stored information.
 - Evan worked on the Arrivals function which will later be used in PageRank. I got the function to compile by debugging the compiler errors. I hope to write test cases and make sure it is fully working as expected. I additionally fixed merge conflicts. 
 ### Problems
 - We all had midterms this week. But, we will make up for any lost progress over the weekend in preparation for the Mid-Project meeting
