@@ -42,7 +42,7 @@
 ### Member Specific Tasks
 - Andrew (me) started on BFS algorithm (once again should be completed by the meeting)
 - Jacob was unable to work on the project during week but will make up for this over the weekend.
-- Evan is working on Arrivals function which will later be used in PageRank.
+- Evan (me) worked on the Arrivals function which will later be used in PageRank. I got the function to compile by debugging the compiler errors. I hope to write test cases and make sure it is fully working as expected. I additionally fixed merge conflicts. 
 ### Problems
 - We all had midterms this week. But, we will make up for any lost progress over the weekend in preparation for the Mid-Project meeting
 ### NEXT WEEK

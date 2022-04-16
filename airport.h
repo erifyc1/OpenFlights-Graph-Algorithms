@@ -15,6 +15,7 @@ class Airport {
         Airport(int uniqueID);
         Airport(string codeName, int uniqueID);
         Airport(string codeName, int uniqueID, pair<string,string> destination);
+        Airport(string codeName, vector<pair<string,string>> destinations);
         void addDestination(pair<string,string> dest);
         vector<pair<string,string>>& getDestinations();
         vector<pair<string,string>> getArrivals(map<string, Airport*> m);
