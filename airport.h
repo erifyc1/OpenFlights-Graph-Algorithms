@@ -14,17 +14,11 @@ class Airport {
         Airport(string codeName);
         Airport(int uniqueID);
         Airport(string codeName, int uniqueID);
-<<<<<<< HEAD
         Airport(string codeName, int uniqueID, pair<string,string> destination);
         Airport(string codeName, vector<pair<string,string>> destinations);
+        std::vector<std::pair<string,string>> getArrivals(map<string, Airport*> m);
         void addDestination(pair<string,string> dest);
         vector<pair<string,string>>& getDestinations();
-=======
-        Airport(string codeName, int uniqueID, string destination);
-        void addDestination(string dest);
-        vector<string>& getDestinations();
-        vector<string>& getArrivals(map<string, Airport*> m);
->>>>>>> 6065990ba285bd4101262ee752b7ad05c52d2b33
         string getCode();
         int getID();
     private:
