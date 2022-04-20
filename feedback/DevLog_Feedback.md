@@ -20,3 +20,13 @@ Sufficient
 
 ### Comments:
 It looks like your group has made some good progress so far. In preparation for the mid-project check-in meeting, don't forget to write test cases for any algorithms you implement and your graph data structure. I would recommend focusing on finishing BFS before the meeting, and making sure your dataset parsing works.
+
+
+## Week of 4/11 - 4/17
+
+
+### Grade
+Sufficient
+
+### Comments:
+The weekend does count as part of the week, so it's not an issue if you have other commitments during the weekdays. So far I would say your group is on track to finish, and if you complete BFS before the meeting that would be great. At the very least, make sure your data parsing and correction is complete for full points on the testing component of the project meeting. Looking forward to meeting with your group later this week.
