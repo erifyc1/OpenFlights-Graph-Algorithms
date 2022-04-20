@@ -1,5 +1,5 @@
 #include "data_handler.h"
-
+#include <queue>
 using namespace std;
 
 DataHandler::DataHandler() {
@@ -115,6 +115,38 @@ DataHandler::~DataHandler() {
         if (p.second != NULL) {
             delete p.second;
             p.second = NULL;
+        }
+    }
+}
+map<string,short> DataHandler::BFS() {
+    map<string, bool> vertex;
+    map<string, short> edges;
+    for (auto v : airports) {
+        if (!vertex[v.first]) {
+            BFS(v.first, edges, vertex);
+        }
+    }
+    return edges;
+}
+
+void DataHandler::BFS(string start, map<string, short>& edges, map<string, bool>& vertices) {
+    vertices[start] = true;
+    queue<string> q;
+    q.push(start);
+    while (!q.empty()) {
+        string curr = q.front();
+        q.pop();
+        for (auto x : airports[curr]->getDestinations()) {
+            string dest = x.second;
+            if (vertices[dest] == false) {
+                vertices[dest] = true;
+                string temp = curr;
+                edges[temp.append(" ").append(dest)] = 1;
+            } else {
+                string temp = curr;
+                edges[temp.append(" ").append(dest)] = 2;
+            }
+            q.push(dest);
         }
     }
 }
