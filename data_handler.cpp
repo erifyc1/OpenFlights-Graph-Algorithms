@@ -47,9 +47,16 @@ void DataHandler::readInCSV(const std::string& filename) {
         // if airport does exist, append destination
         if (airports.find(source) == airports.end()) {
             airports.insert(pair<string, Airport*>(source, new Airport(source, id, destination)));
+            //temp adding this line might delete later
+            if (airports[destination.second] == nullptr) {
+                airports[destination.second] = new Airport(destination.second);
+            }
         }
         else {
             airports.at(source)->addDestination(destination);
+            if (airports[destination.second] == nullptr) {
+                airports[destination.second] = new Airport(destination.second);
+            }
         }
     }
 }
@@ -137,8 +144,10 @@ void DataHandler::BFS(string start, map<string, short>& edges, map<string, bool>
     vertices[start] = true;
     queue<string> q;
     q.push(start);
+    //cout << "check for seg" << endl;
     while (!q.empty()) {
         string curr = q.front();
+        cout << curr << endl;
         q.pop();
         for (auto x : airports[curr]->getDestinations()) {
             string dest = x.second;
