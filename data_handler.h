@@ -24,6 +24,9 @@ class DataHandler {
         // method to write existing map data into compressed .txt file
         void writeMapToFile(const string& filename);
 
+        // getter for reference to airports map (for testing)
+        map<string, Airport*>& getAirports();
+
         //edges will be inputted as "departure arrival" and a 0 will mean unexplored
         // 1 will mean discovery edge and 2 will mean cross edge
         map<string,short> BFS();

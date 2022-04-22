@@ -129,6 +129,10 @@ map<string,short> DataHandler::BFS() {
     return edges;
 }
 
+map<string, Airport*>& DataHandler::getAirports() {
+    return airports;
+}
+
 void DataHandler::BFS(string start, map<string, short>& edges, map<string, bool>& vertices) {
     vertices[start] = true;
     queue<string> q;

@@ -1,0 +1,6 @@
+airline,airline ID,source airport,source airport id,destination airport,destination airport id,codeshare,stops,equipment
+2B,42,JFK,34,STL,35,,0,737
+2B,42,STL,35,DFW,31,,0,737
+2B,42,LIL,340,BRU,69,,0,737
+2B,42,CMW,14,STL,35,,0,737
+2B,42,STL,35,FIA,901,,0,737
