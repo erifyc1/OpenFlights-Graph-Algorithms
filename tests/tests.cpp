@@ -76,3 +76,4 @@ TEST_CASE("BFS easy1", "[valgrind][weight=1]") {
 
 
 }
+//start node and end arent connected

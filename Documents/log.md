@@ -50,3 +50,16 @@
 - Start working on Dijkstra’s
 
 ---
+## Week 4
+- This week we focused more on preparing for our mid project meeting
+- We also made some progress towards PageRank
+### Member Specific
+- Andrew worked on debugging BFS and writting BFS test cases
+- Jacob Wrote test cases for data parsing and also wrote test data sets
+- Evan worked on page rank
+### Problems
+- Since we were preparing for the mid project meeting we were not able to put as much focus towards pagerank progress
+- Also we forgot to do the log file =p
+### NEXT WEEK
+- Finish Page Rank
+- Finish Dijkstra's algorithm

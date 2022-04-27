@@ -48,13 +48,13 @@ void DataHandler::readInCSV(const std::string& filename) {
         if (airports.find(source) == airports.end()) {
             airports.insert(pair<string, Airport*>(source, new Airport(source, id, destination)));
             //temp adding this line might delete later
-            if (airports[destination.second] == nullptr) {
+            if (airports.find(destination.second) == airports.end()) {
                 airports[destination.second] = new Airport(destination.second);
             }
         }
         else {
             airports.at(source)->addDestination(destination);
-            if (airports[destination.second] == nullptr) {
+            if (airports.find(destination.second) == airports.end()) {
                 airports[destination.second] = new Airport(destination.second);
             }
         }
