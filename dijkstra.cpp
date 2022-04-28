@@ -3,23 +3,23 @@
 using namespace std;
 
 // default constructor
-Dijkstra::Dijkstra(): generated(false), weightedAdj(vector<vector<double>>()) {
+Dijkstra::Dijkstra(): generated(false), djWeightedAdj(vector<vector<double>>()) {
     keys_ = map<string, unsigned int>();
 }
 // parameterized constructor, calls generateAdjacency
-Dijkstra::Dijkstra(DataHandler dh): generated(false), weightedAdj(vector<vector<double>>()) {
+Dijkstra::Dijkstra(DataHandler dh): generated(false), djWeightedAdj(vector<vector<double>>()) {
     keys_ = map<string, unsigned int>();
     generateAdjacency(dh);
 }
 // generates weighted adjacency matrix using function in data_handler
 void Dijkstra::generateAdjacency(DataHandler dh) {
     generated = true;
-    WeightedAdjacency w = dh.getWeightedAdjacency();
-    weightedAdj.resize(w.n);
+    djWeightedAdjacency w = dh.getdjWeightedAdjacency();
+    djWeightedAdj.resize(w.n);
     for (size_t i = 0; i < w.n; i++) {
-        weightedAdj[i].resize(w.n);
+        djWeightedAdj[i].resize(w.n);
         for (size_t j = 0; j < w.n; j++) {
-            weightedAdj[i][j] = w.matrix[i][j] == 0 ? 0 : 1 / static_cast<double>(w.matrix[i][j]);
+            djWeightedAdj[i][j] = w.matrix[i][j] == 0 ? 0 : 1 / static_cast<double>(w.matrix[i][j]);
         }
     }
     keys_ = w.keys;
@@ -30,8 +30,8 @@ DijkstraResult Dijkstra::findPath(string start, string dest) {
     DijkstraResult dr;
     vector<GraphVertex> vertices;
     vector<bool> explored;
-    explored.resize(weightedAdj.size());
-    for (size_t i = 0; i < weightedAdj.size(); i++) {
+    explored.resize(djWeightedAdj.size());
+    for (size_t i = 0; i < djWeightedAdj.size(); i++) {
         explored[i] = false;
     }
     /**
@@ -58,11 +58,11 @@ void Dijkstra::dijkstraSearch(vector<GraphVertex>& vertices, vector<bool>& visit
     // ending case, needs to be fixed
     bool possibleTravel = false;
 
-    for (size_t i = 0; i < weightedAdj[vert].size(); i++) {
+    for (size_t i = 0; i < djWeightedAdj[vert].size(); i++) {
         if (visited[i]) continue;
-        if (weightedAdj[vert][i] != 0) {
-            if (vertices[i].distance == -1 || vertices[i].distance > (vertices[vert].distance + weightedAdj[vert][i])) {
-                vertices[i].distance = vertices[vert].distance + weightedAdj[vert][i];
+        if (djWeightedAdj[vert][i] != 0) {
+            if (vertices[i].distance == -1 || vertices[i].distance > (vertices[vert].distance + djWeightedAdj[vert][i])) {
+                vertices[i].distance = vertices[vert].distance + djWeightedAdj[vert][i];
                 vertices[i].prevDirection = vert;
             }
         }

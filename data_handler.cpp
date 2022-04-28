@@ -167,7 +167,8 @@ void DataHandler::BFS(string start, map<string, short>& edges, map<string, bool>
     }
 }
 
-
+// gets the weighted adjacency matrix (each position has value n, the number of flights from i to j)
+// needs to be manipulated for Dijkstra's and PageRank
 WeightedAdjacency DataHandler::getWeightedAdjacency() {
     WeightedAdjacency w;
     w.n = airports.size();
@@ -181,7 +182,7 @@ WeightedAdjacency DataHandler::getWeightedAdjacency() {
     for (pair<string, Airport*> airport : airports) {
         w.keys.insert(pair<string, unsigned int>(airport.first, count++));
     }
-    
+    // for each source airport, add a flight for each destination
     for (pair<string, Airport*> airport : airports) {
         if (airport.second == NULL) continue;
         vector<pair<string,string>>& destinations = airport.second->getDestinations();

@@ -30,7 +30,7 @@ class Dijkstra {
     Dijkstra();
     // parameterized constructor, calls generateAdjacency
     Dijkstra(DataHandler dh);
-    // generates weighted adjacency matrix using function in data_handler
+    // generates special weighted adjacency matrix using function in data_handler
     void generateAdjacency(DataHandler dh);
     // finds path between two points
     DijkstraResult findPath(string start, string dest);
@@ -38,7 +38,10 @@ class Dijkstra {
     void dijkstraSearch(vector<GraphVertex>& vertices, vector<bool>& visited, unsigned int vert);
 
     private:
+    // true if generateAdjacency has been run
     bool generated;
-    vector<vector<double>> weightedAdj;
+    // weighted dijkstra's adjacency matrix (1/n where n is number of flights from i to j)
+    vector<vector<double>> djWeightedAdj;
+    // lookup dictionary from airport name tag to position in matrix (ex. STL -> 3)
     map<string, unsigned int> keys_;
 };

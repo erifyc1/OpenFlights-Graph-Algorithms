@@ -38,8 +38,8 @@ class DataHandler {
         map<string,short> BFS();
         void BFS(string start, map<string, short>& edges, map<string, bool>& vertices);
 
-        // constructs weighted adjacency matrix
-        // used for Dijkstras (requires 1/entry) and Pagerank (needs to be divided by sum of column)
+        // constructs and returns the weighted adjacency matrix (each position has value n, the number of flights from i to j)
+        // needs to be manipulated for Dijkstra's and PageRank
         WeightedAdjacency getWeightedAdjacency();
     private:
         map<string, Airport*> airports;
