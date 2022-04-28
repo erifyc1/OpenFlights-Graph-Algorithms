@@ -1,9 +1,12 @@
 #include "data_handler.h"
 #include "airport.h"
+#include "dijkstra.h"
 
 using namespace std;
 //Currently coding with the idea that this will only be ran on this data set with this formatting
 int main(int argc, char** argv) {
+    DataHandler d;
+
     // import data
     if (argc == 2 && argv[1][0] == 'c' && argv[1][1] == 's' && argv[1][2] == 'v') {
 
@@ -11,7 +14,7 @@ int main(int argc, char** argv) {
         const string output = "./data/compressed.txt";
 
         // read data from csv file
-        DataHandler d(input, true);
+        d.readInCSV(input);
         cout << "successfully read from " << input << endl;
 
         // write data to compressed file
@@ -24,7 +27,7 @@ int main(int argc, char** argv) {
         const string output = "./data/compressed_twice.txt";
 
         // read data from compressed file
-        DataHandler d(input);
+        d.readInCompressed(input);
         cout << "successfully read from " << input << endl;
 
         // write data to another compressed file
@@ -33,12 +36,18 @@ int main(int argc, char** argv) {
         d.writeMapToFile(output);
         cout << "successfully written to " << output << endl;
     }
-    /*
+    /**
+        @todo test further functions below
+    **/
 
-    test further functions below
-    VVVVVVVVVVVVVVVVVVVVVVVVVVVV
-    */
+    // WeightedAdjacency w = d.getWeightedAdjacency();
+    // cout << w.n << endl;
 
 
+
+
+
+
+    
     return 0;
 }

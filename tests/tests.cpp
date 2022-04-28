@@ -77,3 +77,31 @@ TEST_CASE("BFS easy1", "[valgrind][weight=1]") {
 
 }
 //start node and end arent connected
+
+TEST_CASE("Weighted Adjacency Matrix medium", "[valgrind][weight=1]") {
+    const string input = "tests/easyroutes.csv";
+
+    // read data from csv file
+    DataHandler d(input, true);
+    cout << "successfully read from " << input << endl;
+
+    vector<vector<int>> ans = { {0, 0, 0, 0, 0, 0, 0,},
+                                {0, 0, 0, 0, 0, 0, 1,},
+                                {0, 0, 0, 0, 0, 0, 0,},
+                                {0, 0, 0, 0, 0, 0, 0,},
+                                {0, 0, 0, 0, 0, 0, 1,},
+                                {1, 0, 0, 0, 0, 0, 0,},
+                                {0, 0, 1, 1, 0, 0, 0 } };
+    vector<string> ans_keys = {"BRU","CMW","DFW","FIA","JFK","LIL","STL"};
+    WeightedAdjacency w = d.getWeightedAdjacency();
+    for (size_t i = 0; i < w.n; i++) {
+        for (size_t j = 0; j < w.n; j++) {
+            REQUIRE(w.matrix[i][j] == ans[i][j]);
+        }
+    }
+
+    for (size_t k = 0; k < w.keys.size(); k++) {
+        REQUIRE(w.keys[k] == ans_keys[k]);
+    }
+
+}

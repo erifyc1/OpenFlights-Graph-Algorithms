@@ -61,7 +61,7 @@ void DataHandler::readInCSV(const std::string& filename) {
     }
 }
 
-// reads in compressed version of flight data WORK IN PROGRESS
+// reads in compressed version of flight data
 
 void DataHandler::readInCompressed(const std::string& filename) {
     ifstream ifs(filename);
@@ -125,6 +125,8 @@ DataHandler::~DataHandler() {
         }
     }
 }
+
+// BFS main function
 map<string,short> DataHandler::BFS() {
     map<string, bool> vertex;
     map<string, short> edges;
@@ -140,6 +142,7 @@ map<string, Airport*>& DataHandler::getAirports() {
     return airports;
 }
 
+// BFS recursive helper function
 void DataHandler::BFS(string start, map<string, short>& edges, map<string, bool>& vertices) {
     vertices[start] = true;
     queue<string> q;
@@ -162,4 +165,30 @@ void DataHandler::BFS(string start, map<string, short>& edges, map<string, bool>
             q.push(dest);
         }
     }
+}
+
+
+WeightedAdjacency DataHandler::getWeightedAdjacency() {
+    WeightedAdjacency w;
+    w.n = airports.size();
+    w.matrix.resize(w.n);
+    for (size_t i = 0; i < w.n; i++) {
+        w.matrix[i].resize(w.n);
+    }
+    // to save on runtime, airport lookup will be in map
+    unsigned int count = 0;
+    // initialize keys
+    for (pair<string, Airport*> airport : airports) {
+        w.keys.insert(pair<string, unsigned int>(airport.first, count++));
+    }
+    
+    for (pair<string, Airport*> airport : airports) {
+        if (airport.second == NULL) continue;
+        vector<pair<string,string>>& destinations = airport.second->getDestinations();
+        for (pair<string,string> dest : destinations) {
+            if (w.keys.find(dest.second) == w.keys.end()) continue;
+            w.matrix[w.keys.at(airport.first)][w.keys.at(dest.second)]++;
+        }
+    }
+    return w;
 }
