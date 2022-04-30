@@ -14,7 +14,7 @@ Dijkstra::Dijkstra(DataHandler dh): generated(false), djWeightedAdj(vector<vecto
 // generates weighted adjacency matrix using function in data_handler
 void Dijkstra::generateAdjacency(DataHandler dh) {
     generated = true;
-    djWeightedAdjacency w = dh.getdjWeightedAdjacency();
+    WeightedAdjacency w = dh.getWeightedAdjacency();
     djWeightedAdj.resize(w.n);
     for (size_t i = 0; i < w.n; i++) {
         djWeightedAdj[i].resize(w.n);
@@ -36,8 +36,10 @@ DijkstraResult Dijkstra::findPath(string start, string dest) {
     }
     /**
         @todo figure out how to use heap with custom less than Compare class
-        heap<GraphVertex, Compare> h;
     **/
+    heap<GraphVertex, CompareVertex> h;
+    // heap<GraphVertex> h;
+
     if (keys_.find(start) == keys_.end() || keys_.find(dest) == keys_.end()) {
         cout << "no solution, missing start or dest" << endl;
         return DijkstraResult();
@@ -57,7 +59,7 @@ void Dijkstra::dijkstraSearch(vector<GraphVertex>& vertices, vector<bool>& visit
     
     // ending case, needs to be fixed
     bool possibleTravel = false;
-
+    
     for (size_t i = 0; i < djWeightedAdj[vert].size(); i++) {
         if (visited[i]) continue;
         if (djWeightedAdj[vert][i] != 0) {
@@ -72,6 +74,25 @@ void Dijkstra::dijkstraSearch(vector<GraphVertex>& vertices, vector<bool>& visit
     **/
  
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // reference solvemaze code 
 
 // vector<int> SquareMaze::solveMaze() {

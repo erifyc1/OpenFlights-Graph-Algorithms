@@ -19,7 +19,11 @@ struct GraphVertex {
         distance = dist;
         prevDirection = prevDir;
     }
-    constexpr bool operator()( const GraphVertex& lhs, const GraphVertex& rhs ) const {
+};
+
+
+class CompareVertex {
+    bool operator()( const GraphVertex& lhs, const GraphVertex& rhs ) const {
         return lhs.distance < rhs.distance;
     }
 };
