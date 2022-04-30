@@ -5,14 +5,16 @@ using namespace std;
 // default constructor
 Dijkstra::Dijkstra(): generated(false), djWeightedAdj(vector<vector<double>>()) {
     keys_ = map<string, unsigned int>();
+    values_ = vector<string>();
 }
 // parameterized constructor, calls generateAdjacency
-Dijkstra::Dijkstra(DataHandler dh): generated(false), djWeightedAdj(vector<vector<double>>()) {
+Dijkstra::Dijkstra(DataHandler& dh): generated(false), djWeightedAdj(vector<vector<double>>()) {
     keys_ = map<string, unsigned int>();
+    values_ = vector<string>();
     generateAdjacency(dh);
 }
 // generates weighted adjacency matrix using function in data_handler
-void Dijkstra::generateAdjacency(DataHandler dh) {
+void Dijkstra::generateAdjacency(DataHandler& dh) {
     generated = true;
     WeightedAdjacency w = dh.getWeightedAdjacency();
     djWeightedAdj.resize(w.n);
@@ -23,12 +25,16 @@ void Dijkstra::generateAdjacency(DataHandler dh) {
         }
     }
     keys_ = w.keys;
+    values_.resize(keys_.size());
+    for (pair<string, unsigned int> p : keys_) {
+        values_[p.second] = p.first;
+    }
 }
 // finds path between two points
 DijkstraResult Dijkstra::findPath(string start, string dest) {
     if (!generated) throw runtime_error("adjacency matrix not generated");
-    DijkstraResult dr;
     vector<GraphVertex> vertices;
+    vertices.resize(djWeightedAdj.size());
     vector<bool> explored;
     explored.resize(djWeightedAdj.size());
     for (size_t i = 0; i < djWeightedAdj.size(); i++) {
@@ -37,42 +43,62 @@ DijkstraResult Dijkstra::findPath(string start, string dest) {
     /**
         @todo figure out how to use heap with custom less than Compare class
     **/
-    heap<GraphVertex, CompareVertex> h;
-    // heap<GraphVertex> h;
+    heap<GraphVertex, CompareVertex> priorityQueue;
 
     if (keys_.find(start) == keys_.end() || keys_.find(dest) == keys_.end()) {
         cout << "no solution, missing start or dest" << endl;
         return DijkstraResult();
     }
 
-    explored[keys_[start]] = true;
     vertices[keys_[start]].distance = 0;
+    for (pair<string, unsigned int> p : keys_) {
+        vertices[p.second].datum = p.first;
+    }
 
-    /**
-        @todo make recursive call to dijkstraSearch
-    **/
+    priorityQueue.push(vertices[keys_[start]]);
+    cout << "add " << vertices[keys_[start]].datum << " to queue" << endl;
+    while (!priorityQueue.empty()) {
+        GraphVertex v = priorityQueue.pop();
+        dijkstraSearch(vertices, explored, priorityQueue, keys_[v.datum]);
+        cout << "searching " << v.datum << ", #" << keys_[v.datum] << endl;
+    }
+
+    DijkstraResult dr;
+    dr.pathLength = vertices[keys_[dest]].distance;
+    unsigned int startPos = keys_[start];
+    unsigned int currentPos = keys_[dest];
+    while (currentPos != startPos) {
+        dr.path.insert(dr.path.begin(), values_[currentPos]);
+        currentPos = vertices[currentPos].prevDirection;
+    }
+    dr.path.insert(dr.path.begin(), start);
     return dr;
 }
 
 
-void Dijkstra::dijkstraSearch(vector<GraphVertex>& vertices, vector<bool>& visited, unsigned int vert) {
+void Dijkstra::dijkstraSearch(vector<GraphVertex>& vertices, vector<bool>& visited, heap<GraphVertex, CompareVertex>& priorityQueue, unsigned int vert) {
     
     // ending case, needs to be fixed
-    bool possibleTravel = false;
-    
-    for (size_t i = 0; i < djWeightedAdj[vert].size(); i++) {
-        if (visited[i]) continue;
+    if (visited[vert]) {
+        return;
+    }
+
+    for (size_t i = 0; i < djWeightedAdj.size(); i++) {
+        if (visited[i]) {
+            // cout << "visited already" << endl;
+            continue; 
+        }
         if (djWeightedAdj[vert][i] != 0) {
-            if (vertices[i].distance == -1 || vertices[i].distance > (vertices[vert].distance + djWeightedAdj[vert][i])) {
+            // cout << "vert " << i << " distance = " << (vertices[i].distance == INT_MAX ? "Max" : to_string(vertices[i].distance)) << " vert " << vert << " distance = " << (vertices[vert].distance + djWeightedAdj[vert][i]) << endl;
+            if (vertices[i].distance > (vertices[vert].distance + djWeightedAdj[vert][i])) {
+                // cout << "found vert " << i << endl;
                 vertices[i].distance = vertices[vert].distance + djWeightedAdj[vert][i];
                 vertices[i].prevDirection = vert;
+                priorityQueue.push(vertices[i]);
             }
         }
     }
-    /**
-        @todo use priorityqueue to select next node (add as @param)
-    **/
- 
+    visited[vert] = true;
 }
 
 

@@ -41,6 +41,7 @@ int main(int argc, char** argv) {
     **/
 
     // WeightedAdjacency w = d.getWeightedAdjacency();
+    // Dijkstra dk = Dijkstra(d);
     // cout << w.n << endl;
 
 
