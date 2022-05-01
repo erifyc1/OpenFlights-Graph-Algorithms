@@ -6,5 +6,10 @@ TEST = test
 EXE_OBJ = main.o
 OBJS = utils.o main.o airport.o data_handler.o heap.o dijkstra.o
 
+
+EIGEN = /Eigen
+USER_CFLAGS = -I Eigen/Eigen
+
+
 # Use the cs225 makefile template:
 include cs225/make/cs225.mk

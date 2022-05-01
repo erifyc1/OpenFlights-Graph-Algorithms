@@ -41,6 +41,11 @@ class DataHandler {
         // constructs and returns the weighted adjacency matrix (each position has value n, the number of flights from i to j)
         // needs to be manipulated for Dijkstra's and PageRank
         WeightedAdjacency getWeightedAdjacency();
+
+        std::vector<double> centralityAlgorithm();
+        int getCenter();
+
+    
     private:
         map<string, Airport*> airports;
 

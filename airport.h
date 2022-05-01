@@ -19,6 +19,4 @@ class Airport {
         int unique_id_;
         vector<pair<string,string>> destinations;
 
-
-
 };
