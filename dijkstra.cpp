@@ -40,9 +40,7 @@ DijkstraResult Dijkstra::findPath(string start, string dest) {
     for (size_t i = 0; i < djWeightedAdj.size(); i++) {
         explored[i] = false;
     }
-    /**
-        @todo figure out how to use heap with custom less than Compare class
-    **/
+
     heap<GraphVertex, CompareVertex> priorityQueue;
 
     if (keys_.find(start) == keys_.end() || keys_.find(dest) == keys_.end()) {
@@ -50,25 +48,25 @@ DijkstraResult Dijkstra::findPath(string start, string dest) {
         return DijkstraResult();
     }
 
-    vertices[keys_[start]].distance = 0;
+    vertices[keys_.at(start)].distance = 0;
     for (pair<string, unsigned int> p : keys_) {
         vertices[p.second].datum = p.first;
     }
 
-    priorityQueue.push(vertices[keys_[start]]);
-    cout << "add " << vertices[keys_[start]].datum << " to queue" << endl;
+    priorityQueue.push(vertices[keys_.at(start)]);
+    // cout << "add " << vertices[keys_[start]].datum << " to queue" << endl;
     while (!priorityQueue.empty()) {
+        // cout << "searching " << v.datum << ", #" << keys_[v.datum] << endl;
         GraphVertex v = priorityQueue.pop();
         dijkstraSearch(vertices, explored, priorityQueue, keys_[v.datum]);
-        cout << "searching " << v.datum << ", #" << keys_[v.datum] << endl;
     }
 
     DijkstraResult dr;
-    dr.pathLength = vertices[keys_[dest]].distance;
-    unsigned int startPos = keys_[start];
-    unsigned int currentPos = keys_[dest];
+    dr.pathLength = vertices[keys_.at(dest)].distance;
+    unsigned int startPos = keys_.at(start);
+    unsigned int currentPos = keys_.at(dest);
     while (currentPos != startPos) {
-        dr.path.insert(dr.path.begin(), values_[currentPos]);
+        dr.path.insert(dr.path.begin(), values_.at(currentPos));
         currentPos = vertices[currentPos].prevDirection;
     }
     dr.path.insert(dr.path.begin(), start);

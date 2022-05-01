@@ -129,3 +129,26 @@ TEST_CASE("Dijkstra easy", "[valgrind][weight=1]") {
     REQUIRE(true);
 
 }
+
+
+TEST_CASE("Dijkstra hard", "[valgrind][weight=1]") {
+    const string input = "data/compressed.txt";
+
+    // read data from csv file
+    DataHandler d(input);
+    cout << "successfully read from " << input << endl;
+
+
+    Dijkstra dk = Dijkstra(d);
+    cout << "generated" << endl;
+    DijkstraResult result = dk.findPath("STL", "ATL");
+
+    cout << result.pathLength << endl;
+    for (size_t i = 0; i <= result.pathLength; i++) {
+        cout << result.path[i] << (i != result.pathLength ? " -> " : "");
+    }
+    cout << endl;
+
+    REQUIRE(true);
+
+}
