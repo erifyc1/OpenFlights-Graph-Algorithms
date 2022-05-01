@@ -40,9 +40,9 @@ int main(int argc, char** argv) {
         @todo test further functions below
     **/
 
-    // WeightedAdjacency w = d.getWeightedAdjacency();
-    // cout << w.n << endl;
-
+    WeightedAdjacency w = d.getWeightedAdjacency();
+    cout << w.n << endl;
+    std::cout << d.getCenter() << std::endl;
 
 
 
