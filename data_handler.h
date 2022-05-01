@@ -43,7 +43,9 @@ class DataHandler {
         WeightedAdjacency getWeightedAdjacency();
 
         std::vector<double> centralityAlgorithm();
-        int getCenter();
+        pair<unsigned int, string> getCenter();
+        pair<unsigned int, string> getLeastCenter();
+
 
     
     private:
