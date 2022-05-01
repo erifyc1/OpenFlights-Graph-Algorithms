@@ -44,10 +44,6 @@ int main(int argc, char** argv) {
     cout << w.n << endl;
     std::cout << d.getCenter() << std::endl;
 
-
-
-
-
     
     return 0;
 }
