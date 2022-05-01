@@ -78,15 +78,6 @@ int main(int argc, char** argv) {
             cout << "Ex: " << argv[0] << " -pr T" << endl << endl;
         }
     }
-    /**
-        @todo test further functions below
-    **/
-    /*
-
-    WeightedAdjacency w = d.getWeightedAdjacency();
-    cout << w.n << endl;
-    std::cout << d.getCenter() << std::endl;
-    */
 
     
     return 0;
