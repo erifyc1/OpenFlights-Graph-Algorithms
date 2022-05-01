@@ -1,22 +1,23 @@
 #pragma once
 #include "data_handler.h"
 #include "heap.h"
+#include <float.h>
 
 using namespace std;
 
 struct DijkstraResult {
-    DijkstraResult(): pathLength(0), path(vector<string>()) {}
-    unsigned int pathLength;
+    DijkstraResult(): pathLength(0.0), path(vector<string>()) {}
+    double pathLength;
     vector<string> path;
 };
 
 struct GraphVertex {
-    unsigned int distance;
+    double distance;
     unsigned int prevDirection;
     string datum;
-    GraphVertex(): distance(INT_MAX), prevDirection(INT_MAX), datum("") {}
+    GraphVertex(): distance(DBL_MAX), prevDirection(INT_MAX), datum("") {}
 
-    GraphVertex(unsigned int dist, unsigned int prevDir, string name) {
+    GraphVertex(double dist, unsigned int prevDir, string name) {
         distance = dist;
         prevDirection = prevDir;
         datum = name;

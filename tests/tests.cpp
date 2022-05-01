@@ -67,12 +67,12 @@ TEST_CASE("BFS easy1", "[valgrind][weight=1]") {
     cout << "successfully read from " << input << endl;
     map<string,short> out = d.BFS();
 
-    // REQUIRE(out["CMW STL"] == 1);
-    // REQUIRE(out["STL DFW"] == 1);
-    // REQUIRE(out["STL FIA"] == 1);
-    // REQUIRE(out["JFK STL"] == 2);
-    // REQUIRE(out["LIL BRU"] == 1);
-    // REQUIRE(out["CMW JFK"] == 0);
+    REQUIRE(out["CMW STL"] == 1);
+    REQUIRE(out["STL DFW"] == 1);
+    REQUIRE(out["STL FIA"] == 1);
+    REQUIRE(out["JFK STL"] == 2);
+    REQUIRE(out["LIL BRU"] == 1);
+    REQUIRE(out["CMW JFK"] == 0);
 
 
 
@@ -144,8 +144,8 @@ TEST_CASE("Dijkstra hard", "[valgrind][weight=1]") {
     DijkstraResult result = dk.findPath("STL", "ATL");
 
     cout << result.pathLength << endl;
-    for (size_t i = 0; i <= result.pathLength; i++) {
-        cout << result.path[i] << (i != result.pathLength ? " -> " : "");
+    for (size_t i = 0; i < result.path.size(); i++) {
+        cout << result.path[i] << (i != result.path.size() - 1 ? " -> " : "");
     }
     cout << endl;
 

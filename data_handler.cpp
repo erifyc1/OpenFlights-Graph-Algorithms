@@ -158,11 +158,12 @@ void DataHandler::BFS(string start, map<string, short>& edges, map<string, bool>
                 vertices[dest] = true;
                 string temp = curr;
                 edges[temp.append(" ").append(dest)] = 1;
+                q.push(dest);
             } else {
                 string temp = curr;
                 edges[temp.append(" ").append(dest)] = 2;
             }
-            q.push(dest);
+            
         }
     }
 }
