@@ -30,3 +30,13 @@ Sufficient
 
 ### Comments:
 The weekend does count as part of the week, so it's not an issue if you have other commitments during the weekdays. So far I would say your group is on track to finish, and if you complete BFS before the meeting that would be great. At the very least, make sure your data parsing and correction is complete for full points on the testing component of the project meeting. Looking forward to meeting with your group later this week.
+
+
+## Week of 4/18 - 4/24
+
+
+### Grade
+Sufficient
+
+### Comments:
+I think your group has made good progress on the project, as we had discussed during the check-in meeting. The remaining algorithms to be implemented hopefully shouldn't be too difficult for your group to complete. 
