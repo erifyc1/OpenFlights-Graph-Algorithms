@@ -31,10 +31,10 @@
 
 1. Pull the latest version of the project from GitHub and run `make`
 2. Run the executable with one of the following commands:
-#### table 
+##### Commands
 
 | Command | Description | Example |
-| ------------------ |--------------------------------------------------------------------- | --------------------- |
+| --------------------- |----------------------------------------------------------------- | ------------------------- |
 | `./main -csv` | Generates a compressed file version of the provided data/routes.csv to be used in the algorithms. | `./main -csv` |
 | `./main -dk <source> <destination>` | Returns shortest weighted path between source and destination airports and the weighted path length. | `./main -dk STL LIL` |
 | `./main -bfs <source> <destination>` | Returns the length of the shortest path between source and destination airports. | `./main -bfs STL LIL` |
