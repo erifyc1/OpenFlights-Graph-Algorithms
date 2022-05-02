@@ -52,8 +52,21 @@ int main(int argc, char** argv) {
             }
             cout << endl;
         }
-        else if (argc == 2/* <- change this*/ && argv[1][0] == '-' && argv[1][1] == 'b' && argv[1][2] == 'f' && argv[1][3] == 's') {
+        else if (argc == 4/* <- change this*/ && argv[1][0] == '-' && argv[1][1] == 'b' && argv[1][2] == 'f' && argv[1][3] == 's') {
             cout << "BFS Selected" << endl;
+            map<string, short> out = d.BFS();
+            string source = argv[2];
+            string dest = argv[3];
+            source.append(" ").append(dest);
+
+            if (out[source] == 0) {
+                std::cout << source << " does not exist in the graph." << std::endl;
+            } else if (out[source] == 1) {
+                std::cout << source << " is a discovery edge." << std::endl;
+            } else {
+                std::cout << source << " is a cross edge." << std::endl;
+            }
+            
         }
         else if (argc == 3 && argv[1][0] == '-' && argv[1][1] == 'p' && argv[1][2] == 'r') {
             cout << "PageRank Selected" << endl;
