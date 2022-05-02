@@ -33,7 +33,7 @@
 2. Run `./main -csv` to generate the compressed airport data file.
 3. Run any of the following commands:
 ##### Commands
-| Command   | Description | Example |
+| Command         | Description | Example |
 | --------------------- |--------------------------------------- | ------------------------- |
 | `./main -csv` | Generates a compressed flight file of the provided routes.csv for the algorithms. | `./main -csv` |
 | `./main -dk <source> <destination>` | Returns shortest weighted path and path length between input airports. | `./main -dk STL LIL` |
