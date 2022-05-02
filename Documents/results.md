@@ -13,8 +13,8 @@
 - Description: Performs a Breadth-first search of the flight routes.
   - Inputs: startNode, endNode
   - Output: vector of nodes in path (empty if path does not exist)
-  - Target time complexity: O(V^2 + E)
-  - Actual time complexity: O(V^2 *log V + E log E) The runtimes have been multiplied by logV and logE because we are using an map with and underlying AVL-like structure to manage marking edges as discovery and cross as well as accessing what edges come out of which nodes.
+  - Target time complexity: O(V<sup>2</sup> + E)
+  - Actual time complexity: O(V<sup>2</sup> * log(V) + E * log(E)) The runtimes have been multiplied by logV and logE because we are using an map with and underlying AVL-like structure to manage marking edges as discovery and cross as well as accessing what edges come out of which nodes.
 - Example run description: On a full scale run, BFS will first initialize maps that keep track of which vertices have been visited (0 meaning no visited and 1 meaning visited) and which edges are discovery or cross edges (0 non-existent edge, 1 discovery edge, and 2 cross edge). Then for each node in alphabetical order if a node is labeled as unvisited, it will start a BFS from that node. This brings us to the second function in BFS. The starting node will be pushed to a queue. Then until the queue is empty, front node will be removed and all adjacent unvisited Nodes will be pushed to the end of the queue will the edge is marked 1 for discovery. All edges leading to visited nodes will be marked 2 for cross edge. Lets note that the order in which edges are visited is completely dependent on the order they are inputted in the original data set, Thus the same data in a different order will result in a different BFS spanning tree. The final output of the BFS is a map containing all the edges. Also note that it is possible for multiple edges to exist between 2 airports due to different airlines but the algorithm considers them all to be one edge for the sake of simplicity in the future edges for different airlines could also be implemented.
 - Tests implemented: ***********
 
@@ -22,17 +22,20 @@
 - Description: Performs a search, but using a priority queue instead of a regular queue for BFS. Provides a route to maximize "ease" of travel.
   - Inputs: start, destination
   - Output: DijkstraResult struct -> path: vector of nodes in path, pathLength: weighted length of path
-  - Target time complexity: O(|V|^2)
-  - Actual time complexity: ***********
-- Example run description: ***********
-- Tests implemented: ************
+  - Target time complexity: O(V<sup>2</sup>)
+  - Actual time complexity: O(V<sup>2</sup>)
+- Example run description: Start with a weighted, directed adjacency matrix, where each entry represents the reciprocal of the number of flights between the two places. Then, starting from the start airport, update all connected airports with the distance of the current airport plus the weight of the connection and add the id of the current airport as the previous airport. Add each connecting airport that has not been visited to a priority queue. Continue removing the first element of the priority queue and running the previous steps until the priority queue is empty. Then, starting at the destination airport, back trace through each airport, adding each to a vector. The reverse of this vector is the path.
+- Tests implemented: 
+  - path of airport to itself
+  - impossible path
+  - short path test (small data subset)
+  - long path test (full dataset)
 
 ## PageRank
 - Description: Determines the most and least central airports (ranked in a vector), or the probability of ending up at a given airport by taking random flights. Uses the convergence of the probabilities of a Markov matrix. 
   - Inputs: none
   - Output: getCenter() -> most central airport code, getLeastCenter() -> least central airport code
-  - Target time complexity is O(K\*N), K = number of iterations, N = space requirement, so (K\*airlines*airports^2). 
-  - Target space complexity: O(airlines*airports^2)
-  - Actual time complexity: ***********
+  - Target time complexity: O(airlines * airports<sup>2</sup>)
+  - Actual time complexity: O(airports<sup>3</sup>)
 - Example run description: ***********
 - Tests implemented: ************
