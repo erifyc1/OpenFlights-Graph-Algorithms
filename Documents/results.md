@@ -24,8 +24,12 @@
   - Output: DijkstraResult struct -> path: vector of nodes in path, pathLength: weighted length of path
   - Target time complexity: O(V<sup>2</sup>)
   - Actual time complexity: O(V<sup>2</sup>)
-- Example run description: 
-- Tests implemented: ************
+- Example run description: Start with a weighted, directed adjacency matrix, where each entry represents the reciprocal of the number of flights between the two places. Then, starting from the start airport, update all connected airports with the distance of the current airport plus the weight of the connection and add the id of the current airport as the previous airport. Add each connecting airport that has not been visited to a priority queue. Continue removing the first element of the priority queue and running the previous steps until the priority queue is empty. Then, starting at the destination airport, back trace through each airport, adding each to a vector. The reverse of this vector is the path.
+- Tests implemented: 
+  - path of airport to itself
+  - impossible path
+  - short path test (small data subset)
+  - long path test (full dataset)
 
 ## PageRank
 - Description: Determines the most and least central airports (ranked in a vector), or the probability of ending up at a given airport by taking random flights. Uses the convergence of the probabilities of a Markov matrix. 
