@@ -1,5 +1,6 @@
 #include "data_handler.h"
 #include <queue>
+#include <stack>
 #include "Eigen/Core"
 #include "Eigen/Eigenvalues"
 
@@ -137,14 +138,15 @@ map<string, Airport*>& DataHandler::getAirports() {
 }
 
 // BFS recursive helper function
-void DataHandler::BFS(string start, map<string, short>& edges, map<string, bool>& vertices) {
+map<string, string> DataHandler::BFS(string start, map<string, short>& edges, map<string, bool>& vertices) {
+    map<string, string> out;
     vertices[start] = true;
     queue<string> q;
     q.push(start);
     //cout << "check for seg" << endl;
     while (!q.empty()) {
         string curr = q.front();
-        cout << curr << endl;
+        //cout << curr << endl;
         q.pop();
         for (auto x : airports[curr]->getDestinations()) {
             string dest = x.second;
@@ -153,15 +155,40 @@ void DataHandler::BFS(string start, map<string, short>& edges, map<string, bool>
                 string temp = curr;
                 edges[temp.append(" ").append(dest)] = 1;
                 q.push(dest);
+                out[dest] = curr;
             } else {
                 string temp = curr;
-                if (edges[temp.append(" ").append(dest)] != 1) {
-                    edges[temp.append(" ").append(dest)] = 2;
+                temp.append(" ").append(dest);
+                if (edges[temp] != 1) {
+                    edges[temp] = 2;
+                }
+                if (out[dest] == "") {
+                    out[dest] = curr;
                 }
             }
             
         }
     }
+    out[start] = "";
+    cout << "tada" << endl;
+    return out;
+}
+
+vector<string> DataHandler::BFS_to_path(map<string, string> in, string end) {
+    stack<string> q;
+    q.push(end);
+    string next = in[end];
+    while (next != "") {
+        std::cout << next << std::endl;
+        q.push(next);
+        next = in[next];
+    }
+    vector<string> out;
+    while (!q.empty()) {
+        out.push_back(q.top());
+        q.pop();
+    }
+    return out;
 }
 
 // gets the weighted adjacency matrix (each position has value n, the number of flights from i to j)

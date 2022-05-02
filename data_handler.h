@@ -36,7 +36,8 @@ class DataHandler {
         //edges will be inputted as "departure arrival" and a 0 will mean unexplored
         // 1 will mean discovery edge and 2 will mean cross edge
         map<string,short> BFS();
-        void BFS(string start, map<string, short>& edges, map<string, bool>& vertices);
+        map<string, string> BFS(string start, map<string, short>& edges, map<string, bool>& vertices);
+        vector<string> BFS_to_path(map<string, string> in, string end);
 
         // constructs and returns the weighted adjacency matrix (each position has value n, the number of flights from i to j)
         // needs to be manipulated for Dijkstra's and PageRank

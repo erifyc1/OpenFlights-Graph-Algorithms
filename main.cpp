@@ -66,6 +66,13 @@ int main(int argc, char** argv) {
             } else {
                 std::cout << source << " is a cross edge." << std::endl;
             }
+            map<string, short> edges;
+            map<string, bool> vertices;
+            vector<string> path = d.BFS_to_path(d.BFS(argv[2], edges, vertices), dest);
+            std::cout << path[0];
+            for (size_t i = 1; i < path.size(); i++) {
+                std::cout << " -> " << path[i];
+            }
             
         }
         else if (argc == 3 && argv[1][0] == '-' && argv[1][1] == 'p' && argv[1][2] == 'r') {
