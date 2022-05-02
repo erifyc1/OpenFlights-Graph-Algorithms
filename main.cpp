@@ -5,8 +5,6 @@
 using namespace std;
 //Currently coding with the idea that this will only be ran on this data set with this formatting
 int main(int argc, char** argv) {
-    char bfs[] = {'-','b','f','s'};
-    char pagerank[] = {'-','p','a','g','e','r','a','n','k'};
     DataHandler d;
     // case 1: read in data from routes.csv and save to compressed.txt
     if (argc == 2 && argv[1][0] == '-' && argv[1][1] == 'c' && argv[1][2] == 's' && argv[1][3] == 'v') {
@@ -86,11 +84,11 @@ int main(int argc, char** argv) {
             invalid:
             cout << "Invalid Command Line Argument, Usage: " << endl << endl;
             cout << "Dijkstra's Algorithm: " << argv[0] << " -dk  <source airport> <destination airport>" << endl;
-            cout << "Returns shortest weighted path between source and destination as well as the actual path." << endl;
+            cout << "Returns shortest weighted path between source and destination and weighted path length." << endl;
             cout << "Ex: " << argv[0] << " -dk STL LIL" << endl << endl;
 
             cout << "BFS: " << argv[0] << " -bfs <source airport> <destination airport>" << endl;
-            cout << "Desc: Returns shortest path between source and destination as well as the actual path." << endl;
+            cout << "Desc: Returns the length of the shortest path between source and destination." << endl;
             cout << "Ex: " << argv[0] << " -bfs STL LIL" << endl << endl;
 
             cout << "PageRank: " << argv[0] << " -pr  <T/F>" << endl;
