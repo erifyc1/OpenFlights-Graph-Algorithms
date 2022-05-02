@@ -35,7 +35,7 @@
 
 | Command                              | Description                                                                              | Example               |
 | ------------------------------------ | ---------------------------------------------------------------------------------------- | --------------------- |
-| `./main -csv`                        | Generates a compressed flight file of the provided routes.csv for use in the algorithms. | `./main -csv`         |
+| `./main -csv`                        | Generates a compressed flight file from the routes.csv for use in the algorithms.        | `./main -csv`         |
 | `./main -dk <source> <destination>`  | Returns shortest weighted path and path length between input airports.                   | `./main -dk STL LIL`  |
 | `./main -bfs <source> <destination>` | Returns the shortest path length between input airports.                                 | `./main -bfs STL LIL` |
 | `./main -pr <T/F>`                   | Returns most or least central airport, with parameter `T` or `F` respectively.           | `./main -pr T`        |
