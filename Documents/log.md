@@ -63,3 +63,20 @@
 ### NEXT WEEK
 - Finish Page Rank
 - Finish Dijkstra's algorithm
+
+---
+## Week 5
+- Due to finals coming next week, we tried to get most of the algorithms done as well as the presentation.
+- We finished Dijkstra's, PageRank, and fixed BFS.
+- We added several test cases (though more need to be added) and added a command line interface to the executable
+### Member Specific
+- Andrew worked on fixing a few parts of BFS, writing BFS test cases, and adding a CLI to the executable for BFS.
+- Jacob worked on creating a weighted adjacency matrix to represent the flight data, completed Dijkstra's, wrote test cases for the weighted adjacency matrix and Dijkstra's, and wrote much of the CLI for Dijkstra's and PageRank.
+- Evan worked fixing a few bugs with PageRank, creating a function to output the most central and least central airports, and started on PageRank test cases
+### Problems
+- We did not complete all the final test cases and executable CLI entirely.
+- We did not get started on the final presentation yet.
+### NEXT WEEK
+- Finish creating a few more test cases for each algorithm
+- Finish the CLI for BFS
+- Start working (and finish) the final submission requirements
