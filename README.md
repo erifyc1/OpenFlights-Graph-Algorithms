@@ -1,4 +1,8 @@
 # MiniGamerways
+## CS225 Final Project by
+- Andrew Elysee (aelys2)
+- Evan Coats (efcoats2)
+- Jacob Stolker (stolker2)
 ## Project Files and Deliverables
 
 ### Code
@@ -20,12 +24,12 @@
 ### Report
 - /Documents/results.md
 ### Video Presentation
-https://drive.google.com/file/d/12sbATG_VpfpU_FLi245id5Cjbs4Ck70g/view?usp=sharing
+- https://drive.google.com/file/d/12sbATG_VpfpU_FLi245id5Cjbs4Ck70g/view?usp=sharing
 
-### CS225 Final Project
-- Andrew Elysee (aelys2)
-- Evan Coats (efcoats2)
-- Jacob Stolker (stolker2)
 
-Github Organization – You should describe the physical location of all major files and deliverables (code, tests, data, the written report, the presentation video, etc…)
+## Running Instructions
 
+### Build
+- Pull the latest version of the project from GitHub and run `make`
+
+Running Instructions – You should provide full instructions on how to build and run your executable, including how to define the input data and output location for each method. You should also have instructions on how to build and run your test suite, including a general description on what tests you have created. It is in your best interest to make the instructions (and the running of your executables and tests) as simple and straightforward as possible.
