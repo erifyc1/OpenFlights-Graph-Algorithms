@@ -23,15 +23,11 @@ DataHandler::DataHandler(const string& filename, bool from_csv) {
 void DataHandler::readInCSV(const std::string& filename) {
     ifstream ifs(filename);
     string line;
-    // get rid of first entry
+    // get rid of first entry (header)
     getline(ifs, line);
-    unsigned int count = 0;
+
     // read in the rest of the entries
     while (ifs.good()) {
-        if (count % 3380 == 0) {
-            cout << static_cast<double>(count)/676 << "%" << endl;
-        }
-        count++;
 
         getline(ifs, line);
         vector<string> delimited = utils::delimitLine(line, ',');
@@ -70,13 +66,8 @@ void DataHandler::readInCompressed(const std::string& filename) {
     ifstream ifs(filename);
     string line;
 
-    unsigned int count = 0;
     // read in entries
     while (ifs.good()) {
-        if (count % 170 == 0) {
-            cout << static_cast<double>(count)/34 << "%" << endl;
-        }
-        count++;
 
         getline(ifs, line);
         vector<string> initial = utils::delimitLine(line, '>');
@@ -220,7 +211,7 @@ std::vector<double> DataHandler::centralityAlgorithm(){
     }
 
 
-    std::cout << m.col(2117) << std::endl;
+    // std::cout << m.col(2117) << std::endl;
 
     Eigen::VectorXd start = Eigen::VectorXd::Zero(w.n);
 
@@ -233,17 +224,17 @@ std::vector<double> DataHandler::centralityAlgorithm(){
 
     for (int i = 0; i < 100; i++){
         start = m * start;
-        std::cout << std::endl;
-        std::cout << "ORD " << start(2117) << std::endl;
-        std::cout << "ATL " << start(165) << std::endl;
-        std::cout << "Random " << start(10) << std::endl;
-        std::cout << "Random2 " << start(1000) << std::endl;
-        std::cout << std::endl;
+        // std::cout << std::endl;
+        // std::cout << "ORD " << start(2117) << std::endl;
+        // std::cout << "ATL " << start(165) << std::endl;
+        // std::cout << "Random " << start(10) << std::endl;
+        // std::cout << "Random2 " << start(1000) << std::endl;
+        // std::cout << std::endl;
 
     }
 
   
-    std::vector<double> steady_state;
+    vector<double> steady_state;
 
     for (int j = 0; j < (int)w.n; j++){
         steady_state.push_back(start(j));
@@ -255,8 +246,8 @@ std::vector<double> DataHandler::centralityAlgorithm(){
 
 // returns integer corresponding to the index of the most central airport
 
-int DataHandler::getCenter(){
-    std::vector<double> steady_state = centralityAlgorithm();
+pair<unsigned int, string> DataHandler::getCenter(){
+    vector<double> steady_state = centralityAlgorithm();
     double max = 0;
     double maxIndex = 0; 
     WeightedAdjacency w = getWeightedAdjacency();
@@ -265,24 +256,37 @@ int DataHandler::getCenter(){
         if (steady_state.at(i) > max){
             max = steady_state.at(i);
             maxIndex = i;
-            std::map<std::string, unsigned int>::iterator it;
-            for (it = w.keys.begin(); it != w.keys.end(); it++){
-                if ( (int)(*it).second == maxIndex){
-                    std::cout << (*it).first << std::endl;
-                }
-            }
         }
     }
-
-
-    // for (it = w.keys.begin(); it != w.keys.end(); it++)
-    // {
-    //     if ( (int)(*it).second == maxIndex){
-    //         std::cout << (*it).first << std::endl;
-    //     }
-    // }
-
-
-    return maxIndex;
+    map<string, unsigned int>::iterator it;
+    for (it = w.keys.begin(); it != w.keys.end(); it++){
+        if ( (int)(*it).second == maxIndex){
+            return pair<unsigned int, string>(maxIndex, (*it).first);
+        }
+    }
+    cout << "center not found" << endl;
+    return pair<unsigned int, string>(0, "");
 }
 
+
+pair<unsigned int, string> DataHandler::getLeastCenter() {
+    vector<double> steady_state = centralityAlgorithm();
+    double min = INT_MAX;
+    double minIndex = 0; 
+    WeightedAdjacency w = getWeightedAdjacency();
+
+    for (int i = 0; i < (int)steady_state.size(); i++){
+        if (steady_state.at(i) < min){
+            min = steady_state.at(i);
+            minIndex = i;
+        }
+    }
+    map<string, unsigned int>::iterator it;
+    for (it = w.keys.begin(); it != w.keys.end(); it++){
+        if ( (int)(*it).second == minIndex){
+            return pair<unsigned int, string>(minIndex, (*it).first);
+        }
+    }
+    cout << "least center not found" << endl;
+    return pair<unsigned int, string>(0, "");
+}
