@@ -36,6 +36,6 @@
   - Inputs: none
   - Output: getCenter() -> most central airport code, getLeastCenter() -> least central airport code
   - Target time complexity: O(airlines * airports<sup>2</sup>)
-  - Actual time complexity: ***********
+  - Actual time complexity: O(airports<sup>3</sup>)
 - Example run description: ***********
 - Tests implemented: ************
