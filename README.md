@@ -27,19 +27,27 @@
 - https://drive.google.com/file/d/12sbATG_VpfpU_FLi245id5Cjbs4Ck70g/view?usp=sharing
 
 
-## Running Instructions
+## Running Instructions (with provided data)
 
-1. Pull the latest version of the project from GitHub and run `make`
-2. Run the executable with one of the following commands:
+1. Pull the latest version of the project from GitHub and run `make` 
+2. Run `./main -csv` to generate the compressed airport data file.
+3. Run any of the following commands:
 ##### Commands
-
 | Command | Description | Example |
 | --------------------- |------------------------------------------------------ | ------------------------- |
-| `./main -csv` | Generates a compressed file version of the provided data/routes.csv to be used in the algorithms. | `./main -csv` |
-| `./main -dk <source> <destination>` | Returns shortest weighted path between source and destination airports and the weighted path length. | `./main -dk STL LIL` |
-| `./main -bfs <source> <destination>` | Returns the length of the shortest path between source and destination airports. | `./main -bfs STL LIL` |
-| `./main -pr <T/F>` | Returns most or least central/important airport. T = centralized. F = decentralized. | `./main -pr T` |
+| `./main -csv` | Generates a compressed file of the provided data/routes.csv to be used in the algorithms. | `./main -csv` |
+| `./main -dk <source> <destination>` | Returns shortest weighted path and path length between source and destination airports. | `./main -dk STL LIL` |
+| `./main -bfs <source> <destination>` | Returns the shortest path length between source and destination airports. | `./main -bfs STL LIL` |
+| `./main -pr <T/F>` | Returns most or least central airport, with T or F respectively. | `./main -pr T` |
+### Running Instructions (with custom data)
+1. Pull the latest version of the project from GitHub and run `make` 
+2. Replace `/data/routes.csv` with an appropriately formatted flight dataset.
+3. Run `./main -csv` to generate the compressed airport data file.
+4. Run any of the available commands.
 
+### Running Test Suite
+1. Pull the latest version of the project from GitHub and run `make test` 
+2. Run `./test` (tests are located in `/tests/tests.cpp`)
 
-#### table end
-Running Instructions – You should provide full instructions on how to build and run your executable, including how to define the input data and output location for each method. You should also have instructions on how to build and run your test suite, including a general description on what tests you have created. It is in your best interest to make the instructions (and the running of your executables and tests) as simple and straightforward as possible.
+### Tests included
+- *************
