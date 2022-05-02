@@ -32,7 +32,7 @@
 1. Pull the latest version of the project from GitHub and run `make` 
 2. Run `./main -csv` to generate the compressed airport data file.
 3. Run any of the following commands:
-##### Commands
+
 | Command                              | Description                                                                              | Example               |
 | ------------------------------------ | ---------------------------------------------------------------------------------------- | --------------------- |
 | `./main -csv`                        | Generates a compressed flight file of the provided routes.csv for use in the algorithms. | `./main -csv`         |
