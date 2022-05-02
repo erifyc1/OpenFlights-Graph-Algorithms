@@ -71,7 +71,7 @@ TEST_CASE("BFS easy1", "[valgrind][weight=1]") {
     REQUIRE(out["STL DFW"] == 1);
     REQUIRE(out["STL FIA"] == 1);
     REQUIRE(out["JFK STL"] == 2);
-    REQUIRE(out["LIL BRU"] == 1);
+    REQUIRE(out["LIL BRU"] == 2);
     REQUIRE(out["CMW JFK"] == 0);
 
 
