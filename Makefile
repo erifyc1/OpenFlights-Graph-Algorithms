@@ -4,9 +4,9 @@ TEST = test
 
 # Add all object files needed for compiling:
 EXE_OBJ = main.o
-OBJS = utils.o main.o airport.o data_handler.o heap.o dijkstra.o
+OBJS = utils.o heap.o airport.o data_handler.o dijkstra.o main.o
 
-
+# Add dependencies for Eigen library
 EIGEN = /Eigen
 USER_CFLAGS = -I Eigen/Eigen
 
