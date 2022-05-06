@@ -66,6 +66,7 @@ DijkstraResult Dijkstra::findPath(string start, string dest) {
     unsigned int startPos = keys_.at(start);
     unsigned int currentPos = keys_.at(dest);
     while (currentPos != startPos) {
+        if (currentPos > values_.size()) return DijkstraResult();
         dr.path.insert(dr.path.begin(), values_.at(currentPos));
         currentPos = vertices[currentPos].prevDirection;
     }

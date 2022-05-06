@@ -170,7 +170,7 @@ map<string, string> DataHandler::BFS(string start, map<string, short>& edges, ma
         }
     }
     out[start] = "";
-    cout << "tada" << endl;
+    // cout << "tada" << endl;
     return out;
 }
 

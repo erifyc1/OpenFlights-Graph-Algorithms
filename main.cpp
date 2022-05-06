@@ -67,7 +67,7 @@ int main(int argc, char** argv) {
             map<string, short> edges;
             map<string, bool> vertices;
             vector<string> path = d.BFS_to_path(d.BFS(argv[2], edges, vertices), dest);
-            std::cout << path[0];
+            if (path.size() != 0) { std::cout << path[0]; }
             for (size_t i = 1; i < path.size(); i++) {
                 std::cout << " -> " << path[i];
             }

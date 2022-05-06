@@ -50,4 +50,22 @@
 2. Run `./test` (tests are located in `/tests/tests.cpp`)
 ---
 ## Tests included
-- *************
+
+### - General
+    - readInCSV base case
+    - readInCSV small scale test (large scale is too difficult to test)
+    - Weighted Adjacency Matrix construction small test
+    - Weighted Adjacency Matrix construction medium test (large scale is too difficult to test)
+### - BFS
+    - *******
+### - Dijkstra's 
+    - path of airport to itself
+    - impossible path
+    - short path test (small data subset)
+    - long path test (full dataset)
+
+### - PageRank
+    - Steady state vector properties
+    - Convergence of steady state vector
+    - Most central airport
+    - Least central airport
