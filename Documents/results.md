@@ -34,11 +34,16 @@ https://drive.google.com/file/d/12sbATG_VpfpU_FLi245id5Cjbs4Ck70g/view?usp=shari
   - short path test (small data subset)
   - long path test (full dataset)
 
-## PageRank
-- Description: Determines the most and least central airports (ranked in a vector), or the probability of ending up at a given airport by taking random flights. Uses the convergence of the probabilities of a Markov matrix. 
-  - Inputs: none
+## Centrality Algorithm (PageRank)
+- Description: Determines the most and least central airports (ranked in a schotastic vector), or the probability of ending up at a given airport by taking random flights. Uses the convergence of the probabilities of a Markov matrix. This would also be called the steady state vector, or the eigenvector of the transition matrix to the eigenvalue 1, because multiplying by the transition matrix doesn't change the output. One could normally compute it by finding the eigenvalues, but, given the size of our matrix, we decided to use power iteration, which consists of multiplying an initial vector by the transition matrix many times. We then determine the most and least central airports by finding the maximum and minimum values in the matrix.
+  - Inputs: Adjacency matrix of airports
   - Output: getCenter() -> most central airport code, getLeastCenter() -> least central airport code
   - Target time complexity: O(airlines * airports<sup>2</sup>)
   - Actual time complexity: O(airports<sup>3</sup>)
-- Example run description: ***********
-- Tests implemented: ************
+- Example run description: Start with a weighted, directed adjacency matrix, where each entry represents the reciprocal of the number of flights between the two places. Then, normalize each column such that it sums to one, which represents the probability of moving from the airport represented by that column to the airport represented by the row number. Next, multiply a starting vector that has an equal chance of starting at any airport (1/n in each row) by the normalized adjacency matrix 100 times. Take the resulting vector and find the maximum and minimum values which represent the most and least central airports.
+- Tests implemented: 
+  - Steady state vector properties
+  - Convergence of steady state vector
+  - Most central airport
+  - Least central airport
+
