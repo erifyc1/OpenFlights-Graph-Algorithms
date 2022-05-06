@@ -48,7 +48,7 @@ https://drive.google.com/file/d/12sbATG_VpfpU_FLi245id5Cjbs4Ck70g/view?usp=shari
   - Least central airport
 
 ### - General Tests (not directly related to one algorithm)
-    - readInCSV base case
-    - readInCSV small scale test (large scale is too difficult to test)
-    - Weighted Adjacency Matrix construction small test
-    - Weighted Adjacency Matrix construction medium test (large scale is too difficult to test)
+  - readInCSV base case
+  - readInCSV small scale test (large scale is too difficult to test)
+  - Weighted Adjacency Matrix construction small test
+  - Weighted Adjacency Matrix construction medium test (large scale is too difficult to test)
