@@ -3,6 +3,7 @@
 - Andrew Elysee (aelys2)
 - Evan Coats (efcoats2)
 - Jacob Stolker (stolker2)
+---
 ## Project Files and Deliverables
 
 ### Code
@@ -26,7 +27,7 @@
 ### Video Presentation
 - https://drive.google.com/file/d/12sbATG_VpfpU_FLi245id5Cjbs4Ck70g/view?usp=sharing
 
-
+---
 ## Running Instructions (with provided data)
 
 1. Pull the latest version of the project from GitHub and run `make` 
@@ -48,6 +49,6 @@
 ### Running Test Suite
 1. Pull the latest version of the project from GitHub and run `make test` 
 2. Run `./test` (tests are located in `/tests/tests.cpp`)
-
-### Tests included
+---
+## Tests included
 - *************
