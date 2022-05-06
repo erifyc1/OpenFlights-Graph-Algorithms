@@ -52,20 +52,23 @@
 ## Tests included
 
 ### - General
-    - readInCSV base case
-    - readInCSV small scale test (large scale is too difficult to test)
-    - Weighted Adjacency Matrix construction small test
-    - Weighted Adjacency Matrix construction medium test (large scale is too difficult to test)
+   - readInCSV base case
+   - readInCSV small scale test (large scale is too difficult to test)
+   - Weighted Adjacency Matrix construction small test
+   - Weighted Adjacency Matrix construction medium test (large scale is too difficult to test)
 ### - BFS
-    - *******
+   - Nonexistent path
+   - 5 elements with node having only outgoing edges
+   - 10 elements
+   - full data set from Champaign to London
 ### - Dijkstra's 
-    - path of airport to itself
-    - impossible path
-    - short path test (small data subset)
-    - long path test (full dataset)
+   - path of airport to itself
+   - impossible path
+   - short path test (small data subset)
+   - long path test (full dataset)
 
 ### - PageRank
-    - Steady state vector properties
-    - Convergence of steady state vector
-    - Most central airport
-    - Least central airport
+   - Steady state vector properties
+   - Convergence of steady state vector
+   - Most central airport
+   - Least central airport
