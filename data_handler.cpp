@@ -122,6 +122,10 @@ DataHandler::~DataHandler() {
 }
 
 // BFS main function
+// Takes in nothing runs BFS in alphabetical order
+// outputs a map of all the edges marked as discovery(1), cross(2), or nonexistent(0) with key format "departure arrival"
+// so if I wanted to check the edge from JFK to STL the key would be "JFK STL"
+// 
 map<string,short> DataHandler::BFS() {
     map<string, bool> vertex;
     map<string, short> edges;
@@ -138,6 +142,10 @@ map<string, Airport*>& DataHandler::getAirports() {
 }
 
 // BFS recursive helper function
+// Takes in the starting node, a reference to a map for the edges and vertices
+// output is a map in which keys are destination and and values are origins
+// the output is used exclusively by the BFS_to_path function.
+
 map<string, string> DataHandler::BFS(string start, map<string, short>& edges, map<string, bool>& vertices) {
     map<string, string> out;
     vertices[start] = true;
@@ -173,13 +181,16 @@ map<string, string> DataHandler::BFS(string start, map<string, short>& edges, ma
     // cout << "tada" << endl;
     return out;
 }
+// takes in the BFS helper output map and the destination
+// returns a vector in order of airports taken to reach destination
+// if no path exists the output is a vector with only the destination as its element
 
 vector<string> DataHandler::BFS_to_path(map<string, string> in, string end) {
     stack<string> q;
     q.push(end);
     string next = in[end];
     while (next != "") {
-        std::cout << next << std::endl;
+        //std::cout << next << std::endl;
         q.push(next);
         next = in[next];
     }

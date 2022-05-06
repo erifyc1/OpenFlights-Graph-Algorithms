@@ -33,10 +33,24 @@ class DataHandler {
         // getter for reference to airports map (for testing and Dijkstras)
         map<string, Airport*>& getAirports();
 
-        //edges will be inputted as "departure arrival" and a 0 will mean unexplored
-        // 1 will mean discovery edge and 2 will mean cross edge
+        // BFS main function
+        // Takes in nothing runs BFS in alphabetical order
+        // outputs a map of all the edges marked as discovery(1), cross(2), or nonexistent(0) with key format "departure arrival"
+        // so if I wanted to check the edge from JFK to STL the key would be "JFK STL"
+
         map<string,short> BFS();
+
+        // BFS recursive helper function
+        // Takes in the starting node, a reference to a map for the edges and vertices
+        // output is a map in which keys are destination and and values are origins
+        // the output is used exclusively by the BFS_to_path function.
+
         map<string, string> BFS(string start, map<string, short>& edges, map<string, bool>& vertices);
+
+        // takes in the BFS helper output map and the destination
+        // returns a vector in order of airports taken to reach destination
+        // if no path exists the output is a vector with only the destination as its element
+
         vector<string> BFS_to_path(map<string, string> in, string end);
 
         // constructs and returns the weighted adjacency matrix (each position has value n, the number of flights from i to j)

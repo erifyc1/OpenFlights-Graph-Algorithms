@@ -62,7 +62,7 @@ TEST_CASE("BFS base1", "[valgrind][weight=1]") {
 }
 
 TEST_CASE("BFS easy1", "[valgrind][weight=1]") {
-    cout << "BFS easy1" << endl;
+    //cout << "BFS easy1" << endl;
     const string input = "tests/easyroutes.csv";
 
     // read data from csv file
@@ -75,11 +75,68 @@ TEST_CASE("BFS easy1", "[valgrind][weight=1]") {
     REQUIRE(out["JFK STL"] == 2);
     REQUIRE(out["LIL BRU"] == 2);
     REQUIRE(out["CMW JFK"] == 0);
-
+    map<string, short> edges;
+    map<string, bool> vertices;
+    vector<string> path = d.BFS_to_path(d.BFS("CMW", edges, vertices), "FIA");
+    vector<string> dk = {"CMW", "STL", "FIA"};
+    for (int i = 0; i < 3; i++) {
+        REQUIRE(path[i]==dk[i]);
+    }
 
 
 }
 
+TEST_CASE("BFS medium2", "[valgrind][weight=1]") {
+    //cout << "BFS easy1" << endl;
+    const string input = "tests/easyroutes2.csv";
+
+    // read data from csv file
+    DataHandler d(input, true);
+    map<string,short> out = d.BFS();
+
+    REQUIRE(out["BRU CNY"] == 1);
+    REQUIRE(out["MOT CNY"] == 2);
+    REQUIRE(out["CAT MUE"] == 1);
+    REQUIRE(out["JAC MUE"] == 2);
+    REQUIRE(out["LIL BRU"] == 2);
+    REQUIRE(out["CMW STL"] == 1);
+    REQUIRE(out["STL DFW"] == 1);
+    REQUIRE(out["STL FIA"] == 1);
+    REQUIRE(out["JFK STL"] == 2);
+    REQUIRE(out["JFK LIL"] == 1);
+
+    map<string, short> edges;
+    map<string, bool> vertices;
+    vector<string> path = d.BFS_to_path(d.BFS("JFK", edges, vertices), "DFW");
+    vector<string> dk = {"JFK", "STL", "DFW"};
+    for (int i = 0; i < 3; i++) {
+        REQUIRE(path[i]==dk[i]);
+    }
+    edges.clear();
+    vertices.clear();
+    path = d.BFS_to_path(d.BFS("JFK", edges, vertices), "MUE");
+    dk = {"MUE"};
+    for (int i = 0; i < 1; i++) {
+        REQUIRE(path[i]==dk[i]);
+    }
+
+
+}
+TEST_CASE("BFS hard", "[valgrind][weight=1]") {
+    cout << "Dijkstra hard" << endl;
+    const string input = "data/compressed.txt";
+
+    // read data from csv file
+    DataHandler d(input);
+
+    map<string, short> edges;
+    map<string, bool> vertices;
+    vector<string> path = d.BFS_to_path(d.BFS("CMI", edges, vertices), "LHR");
+    vector<string> dk = {"CMI", "DFW", "LHR"};
+    for (int i = 0; i < 3; i++) {
+        REQUIRE(path[i]==dk[i]);
+    }
+}
 
 TEST_CASE("Weighted Adjacency Matrix small", "[valgrind][weight=1]") {
     cout << "Weighted Adjacency Matrix small" << endl;
