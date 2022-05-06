@@ -5,7 +5,6 @@
 - Jacob Stolker (stolker2)
 ---
 ## Project Files and Deliverables
-
 ### Code
 - airport.cpp/h
 - data_handler.cpp/h
