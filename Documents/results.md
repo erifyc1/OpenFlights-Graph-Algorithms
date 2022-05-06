@@ -45,5 +45,4 @@ https://drive.google.com/file/d/12sbATG_VpfpU_FLi245id5Cjbs4Ck70g/view?usp=shari
   - Steady state vector properties
   - Convergence of steady state vector
   - Most central airport
-  - Least central airport
 
