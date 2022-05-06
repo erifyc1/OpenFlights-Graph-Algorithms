@@ -37,7 +37,7 @@
 | -------------------------- | ------------------------------------------------------------------------------ | --------------------- |
 | `./main -csv`              | Compresses routes.csv into compressed.txt for use in the algorithms.           | `./main -csv`         |
 | `./main -dk <src> <dest>`  | Returns shortest weighted path and path length from `src` to `dest` airports.  | `./main -dk STL LIL`  |
-| `./main -bfs <src> <dest>` | Returns the shortest path length (# flights) from `src` to `dest` airports.    | `./main -bfs STL LIL` |
+| `./main -bfs <src> <dest>` | Returns shortest unweighted path and path length from `src` to `dest` airports.| `./main -bfs STL LIL` |
 | `./main -pr <T/F>`         | Returns most or least central airport, with parameter `T` or `F` respectively. | `./main -pr T`        |
 ### Running Instructions (with custom data)
 1. Pull the latest version of the project from GitHub and run `make` 

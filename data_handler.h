@@ -18,7 +18,7 @@ class DataHandler {
         // constructor that either reads from csv or compressed flight data file
         DataHandler(const std::string& filename, bool from_csv=false);
 
-        // destructor
+        // destructor, deletes dynamically allocated airports
         ~DataHandler();
 
         // helper function to read in flight data from given .csv
@@ -37,14 +37,12 @@ class DataHandler {
         // Takes in nothing runs BFS in alphabetical order
         // outputs a map of all the edges marked as discovery(1), cross(2), or nonexistent(0) with key format "departure arrival"
         // so if I wanted to check the edge from JFK to STL the key would be "JFK STL"
-
         map<string,short> BFS();
 
         // BFS recursive helper function
         // Takes in the starting node, a reference to a map for the edges and vertices
         // output is a map in which keys are destination and and values are origins
         // the output is used exclusively by the BFS_to_path function.
-
         map<string, string> BFS(string start, map<string, short>& edges, map<string, bool>& vertices);
 
         // takes in the BFS helper output map and the destination
@@ -57,15 +55,22 @@ class DataHandler {
         // needs to be manipulated for Dijkstra's and PageRank
         WeightedAdjacency getWeightedAdjacency();
 
+        // calculates the steady state vector from the pagerank algorithm
         std::vector<double> centralityAlgorithm();
+
+        // calculates the steady state vector from the pagerank algorithm (variant for testing)
         std::vector<double> centralityAlgorithmTest();
 
+        // uses the centrality algorithm (pagerank) to find the largest weighted airport in the steady state vector
         pair<unsigned int, string> getCenter();
+
+        // uses the centrality algorithm (pagerank) to find the smallest weighted airport in the steady state vector
         pair<unsigned int, string> getLeastCenter();
 
 
     
     private:
+        // map to lookup airports
         map<string, Airport*> airports;
 
 };

@@ -7,10 +7,12 @@ template <class T, class Compare = std::less<T>>
 class heap
 {
   public:
+    // creates empty heap
     heap() {
         _elems.push_back(T());
     }
-
+    
+    // creates heap from vector
     heap(const std::vector<T>& elems) {
         _elems.push_back(T());
 
@@ -23,10 +25,12 @@ class heap
         }
     }
 
+    // returns root position of heap
     size_t root() const {
         return 1;
     }
 
+    // returns next element in heap, removing it from the heap
     T pop() {
         if (_elems.size() == root()) return T();
 
@@ -37,15 +41,18 @@ class heap
         return root_;
     }
 
+    // returns next element in heap, without removing it from the heap
     T peek() const {
         return _elems[root()];
     }
 
+    // adds element to heap
     void push(const T& elem) {
         _elems.push_back(elem);
         heapifyUp(_elems.size() - 1);
     }   
 
+    // changes elem at idx to new element
     void updateElem(const size_t & idx, const T& elem) {
         _elems[idx] = elem;
         if (higherPriority(elem, _elems[parent(idx)])) {
@@ -56,11 +63,12 @@ class heap
         }  
     }
 
-
+    // returns whether the heap is empty
     bool empty() const {
         return _elems.size() == root();
     }
 
+    // gets elems (adds them to heaped vector)
     void getElems(std::vector<T> & heaped) const {
         for (size_t i = root(); i < _elems.size(); i++) {
             heaped.push_back(_elems[i]);
@@ -68,24 +76,33 @@ class heap
     }
 
   private:
+    // vector containing elements of heap
     std::vector<T> _elems;
+
+    // compare class to determine how elements are prioritized
     Compare higherPriority;
+
+    // returns idx of left child of elem at idx
     size_t leftChild(size_t currentIdx) const {
         return 2 * currentIdx;
     }
 
+    // returns idx of right child of elem at idx
     size_t rightChild(size_t currentIdx) const {
         return 2 * currentIdx + 1;
     }
 
+    // returns idx of parent of elem at idx
     size_t parent(size_t currentIdx) const {
         return floor(currentIdx / 2);
     }
 
+    // returns whether elem at idx has a child
     bool hasAChild(size_t currentIdx) const {
         return rightChild(currentIdx) < _elems.size() || leftChild(currentIdx) < _elems.size();
     }
 
+    // returns the max priority child of elem at idx
     size_t maxPriorityChild(size_t currentIdx) const {
         size_t left = leftChild(currentIdx);
         size_t right = rightChild(currentIdx);

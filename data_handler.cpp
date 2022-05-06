@@ -12,6 +12,7 @@ DataHandler::DataHandler() {
 
 DataHandler::DataHandler(const string& filename, bool from_csv) {
     airports = map<string, Airport*>();
+    // chooses whether to read in CSV format or compressed format
     if (from_csv) {
         readInCSV(filename);
     }
@@ -43,16 +44,16 @@ void DataHandler::readInCSV(const std::string& filename) {
         try { id = stoi(delimited.at(3)); }
         catch(std::invalid_argument& e) { id = -1; }
 
-        // if airport does not exist, add it
-        // if airport does exist, append destination
+        // if airport does not exist, add new entry to map
         if (airports.find(source) == airports.end()) {
             airports.insert(pair<string, Airport*>(source, new Airport(source, id, destination)));
-            //temp adding this line might delete later
+            // prevent duplicate additions
             if (airports.find(destination.second) == airports.end()) {
                 airports[destination.second] = new Airport(destination.second);
             }
         }
         else {
+            // if airport does exist, append destination
             airports.at(source)->addDestination(destination);
             if (airports.find(destination.second) == airports.end()) {
                 airports[destination.second] = new Airport(destination.second);
@@ -72,12 +73,15 @@ void DataHandler::readInCompressed(const std::string& filename) {
 
         getline(ifs, line);
         vector<string> initial = utils::delimitLine(line, '>');
+        // make sure line is of valid size
         if (initial.size() <= 1) { return; }
 
+        // dynamically allocate new airport and insert into map
         string source = initial.at(0);
         Airport* ap = new Airport(source, -1);
         airports.insert(pair<string, Airport*>(source, ap));
 
+        // further separate line to obtain destinations and airlines
         vector<string> destinations = utils::delimitLine(initial.at(1), ',');
         for (string dest : destinations) {
             if (dest.size() == 0) continue;
@@ -87,7 +91,7 @@ void DataHandler::readInCompressed(const std::string& filename) {
                 ap->addDestination(pair<string,string>(utils::removeChar(sep[0], rem), utils::removeChar(sep[1], rem)));
             }
             else {
-                cout << "invalid format of compressed file"  << endl;
+                cout << "invalid format of compressed file, re-run generation"  << endl;
             }
         }
     }
@@ -125,7 +129,6 @@ DataHandler::~DataHandler() {
 // Takes in nothing runs BFS in alphabetical order
 // outputs a map of all the edges marked as discovery(1), cross(2), or nonexistent(0) with key format "departure arrival"
 // so if I wanted to check the edge from JFK to STL the key would be "JFK STL"
-// 
 map<string,short> DataHandler::BFS() {
     map<string, bool> vertex;
     map<string, short> edges;
@@ -141,20 +144,18 @@ map<string, Airport*>& DataHandler::getAirports() {
     return airports;
 }
 
+
 // BFS recursive helper function
 // Takes in the starting node, a reference to a map for the edges and vertices
 // output is a map in which keys are destination and and values are origins
 // the output is used exclusively by the BFS_to_path function.
-
 map<string, string> DataHandler::BFS(string start, map<string, short>& edges, map<string, bool>& vertices) {
     map<string, string> out;
     vertices[start] = true;
     queue<string> q;
     q.push(start);
-    //cout << "check for seg" << endl;
     while (!q.empty()) {
         string curr = q.front();
-        //cout << curr << endl;
         q.pop();
         for (auto x : airports[curr]->getDestinations()) {
             string dest = x.second;
@@ -181,10 +182,11 @@ map<string, string> DataHandler::BFS(string start, map<string, short>& edges, ma
     // cout << "tada" << endl;
     return out;
 }
+
+
 // takes in the BFS helper output map and the destination
 // returns a vector in order of airports taken to reach destination
 // if no path exists the output is a vector with only the destination as its element
-
 vector<string> DataHandler::BFS_to_path(map<string, string> in, string end) {
     stack<string> q;
     q.push(end);
@@ -203,17 +205,17 @@ vector<string> DataHandler::BFS_to_path(map<string, string> in, string end) {
 }
 
 // gets the weighted adjacency matrix (each position has value n, the number of flights from i to j)
-// needs to be manipulated for Dijkstra's and PageRank
+// will be manipulated for Dijkstra's and PageRank
 WeightedAdjacency DataHandler::getWeightedAdjacency() {
+    // initialize variables
     WeightedAdjacency w;
     w.n = airports.size();
     w.matrix.resize(w.n);
     for (size_t i = 0; i < w.n; i++) {
         w.matrix[i].resize(w.n);
     }
-    // to save on runtime, airport lookup will be in map
     unsigned int count = 0;
-    // initialize keys
+    // initialize keys of airport lookup map
     for (pair<string, Airport*> airport : airports) {
         w.keys.insert(pair<string, unsigned int>(airport.first, count++));
     }
@@ -230,16 +232,18 @@ WeightedAdjacency DataHandler::getWeightedAdjacency() {
 }
 
 
-
+// calculates the steady state vector from the pagerank algorithm
 std::vector<double> DataHandler::centralityAlgorithm(){
     WeightedAdjacency w = getWeightedAdjacency();
     Eigen::MatrixXd m(w.n, w.n);
-
+    // normalize weighted adjacency matrix by column
     for (int i = 0; i < (int)w.n; i++){
+        // sum all entries in column
         double colSum = 0;
         for (int j = 0; j < (int)w.n; j++){
             colSum += w.matrix.at(j).at(i);
         }
+        // divide all entries in column by column sum (or set to 1/n if column sum = 0)
         for (int j = 0; j < (int)w.n; j++){
             if (colSum != 0){
                 m(j,i) = (double)w.matrix.at(j).at(i)/colSum;
@@ -250,49 +254,38 @@ std::vector<double> DataHandler::centralityAlgorithm(){
         }
     }
 
-
-    // std::cout << m.col(2117) << std::endl;
-
     Eigen::VectorXd start = Eigen::VectorXd::Zero(w.n);
-
     for (int i = 0; i < (int)w.n; i++){
         start(i) = (1.00)/((double)(w.n));
     }
 
+    // run power iteration
     start = m * start;
-
-
     for (int i = 0; i < 100; i++){
         start = m * start;
-        // std::cout << std::endl;
-        // std::cout << "ORD " << start(2117) << std::endl;
-        // std::cout << "ATL " << start(165) << std::endl;
-        // std::cout << "Random " << start(10) << std::endl;
-        // std::cout << "Random2 " << start(1000) << std::endl;
-        // std::cout << std::endl;
-
     }
 
-  
+    // convert to vector<double> steady state vector
     vector<double> steady_state;
 
     for (int j = 0; j < (int)w.n; j++){
         steady_state.push_back(start(j));
-        
     }
-
     return steady_state;
 }
 
+// calculates the steady state vector from the pagerank algorithm (variant for testing)
 std::vector<double> DataHandler::centralityAlgorithmTest(){
     WeightedAdjacency w = getWeightedAdjacency();
     Eigen::MatrixXd m(w.n, w.n);
-
+    // normalize by column
     for (int i = 0; i < (int)w.n; i++){
+        // sum all entries in column
         double colSum = 0;
         for (int j = 0; j < (int)w.n; j++){
             colSum += w.matrix.at(j).at(i);
         }
+        // divide all entries in column by column sum (or set to 1/n if column sum = 0)
         for (int j = 0; j < (int)w.n; j++){
             if (colSum != 0){
                 m(j,i) = (double)w.matrix.at(j).at(i)/colSum;
@@ -303,53 +296,43 @@ std::vector<double> DataHandler::centralityAlgorithmTest(){
         }
     }
 
-
-    // std::cout << m.col(2117) << std::endl;
-
     Eigen::VectorXd start = Eigen::VectorXd::Zero(w.n);
-
     for (int i = 0; i < (int)w.n; i++){
         start(i) = (1.00)/((double)(w.n));
     }
 
+    // run power iteration
     start = m * start;
-
-
     for (int i = 0; i < 150; i++){
         start = m * start;
-        // std::cout << std::endl;
-        // std::cout << "ORD " << start(2117) << std::endl;
-        // std::cout << "ATL " << start(165) << std::endl;
-        // std::cout << "Random " << start(10) << std::endl;
-        // std::cout << "Random2 " << start(1000) << std::endl;
-        // std::cout << std::endl;
-
     }
 
-  
+    // convert to vector<double> steady state vector
     std::vector<double> steady_state;
 
     for (int j = 0; j < (int)w.n; j++){
         steady_state.push_back(start(j)); 
     }
-
     return steady_state;
 }
 
 // returns integer corresponding to the index of the most central airport
-
 pair<unsigned int, string> DataHandler::getCenter(){
+    // get steady state vector
     vector<double> steady_state = centralityAlgorithm();
     double max = 0;
     double maxIndex = 0; 
     WeightedAdjacency w = getWeightedAdjacency();
 
+    // find position of max value in vector
     for (int i = 0; i < (int)steady_state.size(); i++){
         if (steady_state.at(i) > max){
             max = steady_state.at(i);
             maxIndex = i;
         }
     }
+
+    // find airport name of max value position
     map<string, unsigned int>::iterator it;
     for (it = w.keys.begin(); it != w.keys.end(); it++){
         if ( (int)(*it).second == maxIndex){
@@ -362,17 +345,21 @@ pair<unsigned int, string> DataHandler::getCenter(){
 
 
 pair<unsigned int, string> DataHandler::getLeastCenter() {
+    // get steady state vector
     vector<double> steady_state = centralityAlgorithm();
     double min = INT_MAX;
     double minIndex = 0; 
     WeightedAdjacency w = getWeightedAdjacency();
 
+    // find position of min value in vector
     for (int i = 0; i < (int)steady_state.size(); i++){
         if (steady_state.at(i) < min){
             min = steady_state.at(i);
             minIndex = i;
         }
     }
+
+    // find airport name of min value position
     map<string, unsigned int>::iterator it;
     for (it = w.keys.begin(); it != w.keys.end(); it++){
         if ( (int)(*it).second == minIndex){

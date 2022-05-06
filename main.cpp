@@ -50,28 +50,34 @@ int main(int argc, char** argv) {
             }
             cout << endl;
         }
-        else if (argc == 4/* <- change this*/ && argv[1][0] == '-' && argv[1][1] == 'b' && argv[1][2] == 'f' && argv[1][3] == 's') {
+        else if (argc == 4 && argv[1][0] == '-' && argv[1][1] == 'b' && argv[1][2] == 'f' && argv[1][3] == 's') {
             cout << "BFS Selected" << endl;
             map<string, short> out = d.BFS();
             string source = argv[2];
             string dest = argv[3];
-            source.append(" ").append(dest);
+            string query = source + " " + dest;
 
-            if (out[source] == 0) {
-                std::cout << source << " does not exist in the graph." << std::endl;
-            } else if (out[source] == 1) {
-                std::cout << source << " is a discovery edge." << std::endl;
+            if (out[query] == 0) {
+                cout << source << "-" << dest << " is not an edge in the graph." << endl;
+            } else if (out[query] == 1) {
+                cout << source << "-" << dest << " is a discovery edge." << endl;
             } else {
-                std::cout << source << " is a cross edge." << std::endl;
+                cout << source << "-" << dest << " is a cross edge." << endl;
             }
             map<string, short> edges;
             map<string, bool> vertices;
-            vector<string> path = d.BFS_to_path(d.BFS(argv[2], edges, vertices), dest);
-            if (path.size() != 0) { std::cout << path[0]; }
-            for (size_t i = 1; i < path.size(); i++) {
-                std::cout << " -> " << path[i];
+            vector<string> path = d.BFS_to_path(d.BFS(source, edges, vertices), dest);
+            if (path.size() == 1 && source != dest) { 
+                cout << "No path found."; 
             }
-            
+            else {
+                cout << "Path length: " << path.size() << endl;
+                cout << "Path Trace: ";
+                for (size_t i = 0; i < path.size(); i++) {
+                    cout << path[i] << (i != path.size() - 1 ? " -> " : "");
+                }
+            }
+            cout << endl;
         }
         else if (argc == 3 && argv[1][0] == '-' && argv[1][1] == 'p' && argv[1][2] == 'r') {
             cout << "PageRank Selected" << endl;
