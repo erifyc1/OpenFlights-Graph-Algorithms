@@ -22,8 +22,9 @@ DataHandler::DataHandler(const string& filename, bool from_csv) {
 }
 
 // reads in raw csv flight data
-void DataHandler::readInCSV(const std::string& filename) {
+bool DataHandler::readInCSV(const std::string& filename) {
     ifstream ifs(filename);
+    if (!ifs.is_open()) return false;
     string line;
     // get rid of first entry (header)
     getline(ifs, line);
@@ -33,7 +34,7 @@ void DataHandler::readInCSV(const std::string& filename) {
 
         getline(ifs, line);
         vector<string> delimited = utils::delimitLine(line, ',');
-        if (delimited.size() <= 1) { return; }
+        if (delimited.size() <= 1) { return true; }
 
 
         string source = delimited.at(2);
@@ -60,6 +61,7 @@ void DataHandler::readInCSV(const std::string& filename) {
             }
         }
     }
+    return true;
 }
 
 // reads in compressed version of flight data

@@ -8,18 +8,29 @@ int main(int argc, char** argv) {
     cout << "\n\nData Processing: " << endl;
     DataHandler d;
     // case 1: read in data from routes.csv and save to compressed.txt
-    if (argc == 2 && argv[1][0] == '-' && argv[1][1] == 'c' && argv[1][2] == 's' && argv[1][3] == 'v') {
+    if ((argc == 2 || argc == 3) && argv[1][0] == '-' && argv[1][1] == 'c' && argv[1][2] == 's' && argv[1][3] == 'v') {
 
-        const string input = "./data/routes.csv";
-        const string output = "./data/compressed.txt";
+        string input;
+        string output = "./data/compressed.txt";
+
+        // no specified input file
+        if (argc == 2) {
+            input = "./data/routes.csv";
+        }
+        else {
+            input = argv[2];
+        }
 
         // read data from csv file
-        d.readInCSV(input);
-        cout << "Successfully read flight data from " << input << endl;
-
-        // write data to compressed file
-        d.writeMapToFile(output);
-        cout << "successfully wrote flight data to " << output << endl;
+        if (d.readInCSV(input)) {
+            cout << "Successfully read flight data from " << input << endl;
+            // write data to compressed file
+            d.writeMapToFile(output);
+            cout << "successfully wrote flight data to " << output << endl;
+        }
+        else {
+            cout << "Bad input file" << endl;
+        }
     }
     // case 2: read in data from compressed.txt and save to compressed_twice.txt
     else {
@@ -94,18 +105,22 @@ int main(int argc, char** argv) {
         }
         else {
             invalid:
-            cout << "Invalid Command Line Argument, Usage: " << endl << endl;
-            cout << "Dijkstra's Algorithm: " << argv[0] << " -dk  <source airport> <destination airport>" << endl;
-            cout << "Returns shortest weighted path between source and destination and weighted path length." << endl;
-            cout << "Ex: " << argv[0] << " -dk STL LIL" << endl << endl;
+            cout << "\n\nInvalid Command Line Argument, Usage: " << endl << endl;
+            cout << "-> Generate Compressed Routes: " << argv[0] << " -csv <file=default>" << endl;
+            cout << "   - Converts provided csv into compressed.txt. Default = ./data/routes.csv" << endl;
+            cout << "   - Ex: " << argv[0] << " -csv" << endl << endl;
 
-            cout << "BFS: " << argv[0] << " -bfs <source airport> <destination airport>" << endl;
-            cout << "Desc: Returns the length of the shortest path between source and destination." << endl;
-            cout << "Ex: " << argv[0] << " -bfs STL LIL" << endl << endl;
+            cout << "-> Dijkstra's Algorithm: " << argv[0] << " -dk <source airport> <destination airport>" << endl;
+            cout << "   - Returns shortest weighted path between source and destination and weighted path length." << endl;
+            cout << "   - Ex: " << argv[0] << " -dk STL LIL" << endl << endl;
 
-            cout << "PageRank: " << argv[0] << " -pr  <T/F>" << endl;
-            cout << "Returns most or least central/important airport. T = centralized. F = decentralized." << endl;
-            cout << "Ex: " << argv[0] << " -pr T" << endl << endl;
+            cout << "-> BFS: " << argv[0] << " -bfs <source airport> <destination airport>" << endl;
+            cout << "   - Desc: Returns shortest unweighted path between source and destination and path length." << endl;
+            cout << "   - Ex: " << argv[0] << " -bfs STL LIL" << endl << endl;
+
+            cout << "-> PageRank: " << argv[0] << " -pr  <T/F>" << endl;
+            cout << "   - Returns most or least central/important airport. T = centralized. F = decentralized." << endl;
+            cout << "   - Ex: " << argv[0] << " -pr T" << endl << endl;
         }
     }
     cout << "\n\n";

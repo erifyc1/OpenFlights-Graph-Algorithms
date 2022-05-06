@@ -22,7 +22,7 @@ class DataHandler {
         ~DataHandler();
 
         // helper function to read in flight data from given .csv
-        void readInCSV(const std::string& filename);
+        bool readInCSV(const std::string& filename);
 
         // helper function to read in flight data from given .txt
         void readInCompressed(const std::string& filename);
