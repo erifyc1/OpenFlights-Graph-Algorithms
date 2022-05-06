@@ -5,6 +5,7 @@
 using namespace std;
 //Currently coding with the idea that this will only be ran on this data set with this formatting
 int main(int argc, char** argv) {
+    cout << "\n\nData Processing: " << endl;
     DataHandler d;
     // case 1: read in data from routes.csv and save to compressed.txt
     if (argc == 2 && argv[1][0] == '-' && argv[1][1] == 'c' && argv[1][2] == 's' && argv[1][3] == 'v') {
@@ -14,11 +15,11 @@ int main(int argc, char** argv) {
 
         // read data from csv file
         d.readInCSV(input);
-        cout << "successfully read from " << input << endl;
+        cout << "Successfully read flight data from " << input << endl;
 
         // write data to compressed file
         d.writeMapToFile(output);
-        cout << "successfully written to " << output << endl;
+        cout << "successfully wrote flight data to " << output << endl;
     }
     // case 2: read in data from compressed.txt and save to compressed_twice.txt
     else {
@@ -37,21 +38,26 @@ int main(int argc, char** argv) {
 
 
         if (argc == 4 && argv[1][0] == '-' && argv[1][1] == 'd' && argv[1][2] == 'k') {
-            cout << "Dijkstra's Algorithm Selected" << endl;
+            cout << "\n\nDijkstra's Algorithm Selected" << endl;
             string start = argv[2];
             string dest = argv[3];
             cout << "Finding path between " << start << " and " << dest << endl;
             Dijkstra dk = Dijkstra(d);
             DijkstraResult result = dk.findPath(start, dest);
-            cout << "Weighted path length: " << result.pathLength << endl;
-            cout << "Path Trace: ";
-            for (size_t i = 0; i < result.path.size(); i++) {
-                cout << result.path[i] << (i != result.path.size() - 1 ? " -> " : "");
+            if (result.path.size() == 0) {
+                cout << "No path found.";
+            }
+            else {
+                cout << "Weighted path length: " << result.pathLength << endl;
+                cout << "Path Trace: ";
+                for (size_t i = 0; i < result.path.size(); i++) {
+                    cout << result.path[i] << (i != result.path.size() - 1 ? " -> " : "");
+                }
             }
             cout << endl;
         }
         else if (argc == 4 && argv[1][0] == '-' && argv[1][1] == 'b' && argv[1][2] == 'f' && argv[1][3] == 's') {
-            cout << "BFS Selected" << endl;
+            cout << "\n\nBFS Selected" << endl;
             map<string, short> out = d.BFS();
             string source = argv[2];
             string dest = argv[3];
@@ -80,7 +86,7 @@ int main(int argc, char** argv) {
             cout << endl;
         }
         else if (argc == 3 && argv[1][0] == '-' && argv[1][1] == 'p' && argv[1][2] == 'r') {
-            cout << "PageRank Selected" << endl;
+            cout << "\n\nPageRank Selected" << endl;
             if (argv[2][0] != 'T' && argv[2][0] != 'F') goto invalid;
             pair<unsigned int, string> res;
             res = argv[2][0] == 'T' ? d.getCenter() : d.getLeastCenter();
@@ -102,7 +108,7 @@ int main(int argc, char** argv) {
             cout << "Ex: " << argv[0] << " -pr T" << endl << endl;
         }
     }
-
+    cout << "\n\n";
     
     return 0;
 }
