@@ -152,3 +152,47 @@ TEST_CASE("Dijkstra hard", "[valgrind][weight=1]") {
     REQUIRE(true);
 
 }
+
+TEST_CASE("Steady State Vector Properties", "[valgrind][weight=1]") {
+    const string input = "data/compressed.txt";
+
+    // read data from csv file
+    DataHandler d(input);
+    // cout << "successfully read from " << input << endl;
+    std::vector<double> v = d.centralityAlgorithm();
+
+    double sum = 0; 
+
+    for (int i = 0; i < (int)v.size(); i++){
+        sum+= v.at(i);
+    }
+
+
+    REQUIRE( abs(1 - sum) <= 0.00001 );
+
+}
+
+TEST_CASE("Convergence of Steady State Vector", "[valgrind][weight=1]") {
+    const string input = "data/compressed.txt";
+
+    // read data from csv file
+    DataHandler d(input);
+    // cout << "successfully read from " << input << endl;
+    std::vector<double> v = d.centralityAlgorithm();
+    std::vector<double> v2 = d.centralityAlgorithmTest();
+
+    REQUIRE( abs(v.at(165) - v2.at(165)) <= 0.00001 );
+
+}
+
+TEST_CASE("Most Central Airport", "[valgrind][weight=1]") {
+    const string input = "data/compressed.txt";
+
+    // read data from csv file
+    DataHandler d(input);
+    // cout << "successfully read from " << input << endl;
+
+    REQUIRE( d.getCenter() == 165);
+
+}
+
