@@ -124,10 +124,10 @@ TEST_CASE("BFS medium2", "[valgrind][weight=1]") {
 }
 TEST_CASE("BFS hard", "[valgrind][weight=1]") {
     cout << "Dijkstra hard" << endl;
-    const string input = "data/compressed.txt";
+    const string input = "data/routes.csv";
 
     // read data from csv file
-    DataHandler d(input);
+    DataHandler d(input, true);
 
     map<string, short> edges;
     map<string, bool> vertices;
@@ -269,10 +269,10 @@ TEST_CASE("Dijkstra easy", "[valgrind][weight=1]") {
 
 TEST_CASE("Dijkstra hard", "[valgrind][weight=1]") {
     cout << "Dijkstra hard" << endl;
-    const string input = "data/compressed.txt";
+    const string input = "data/routes.csv";
 
     // read data from csv file
-    DataHandler d(input);
+    DataHandler d(input, true);
 
 
     Dijkstra dk = Dijkstra(d);
@@ -293,10 +293,10 @@ TEST_CASE("Dijkstra hard", "[valgrind][weight=1]") {
 
 TEST_CASE("PageRank Steady State Vector Properties", "[valgrind][weight=1]") {
     cout << "PageRank Steady State Vector Properties" << endl;
-    const string input = "data/compressed.txt";
+    const string input = "data/routes.csv";
 
     // read data from csv file
-    DataHandler d(input);
+    DataHandler d(input, true);
     // cout << "successfully read from " << input << endl;
     std::vector<double> v = d.centralityAlgorithm();
 
@@ -313,13 +313,13 @@ TEST_CASE("PageRank Steady State Vector Properties", "[valgrind][weight=1]") {
 
 TEST_CASE("PageRank Convergence of Steady State Vector", "[valgrind][weight=1]") {
     cout << "PageRank Convergence of Steady State Vector" << endl;
-    const string input = "data/compressed.txt";
+    const string input = "data/routes.csv";
 
     // read data from csv file
-    DataHandler d(input);
-    std::vector<double> v = d.centralityAlgorithm();
-    std::vector<double> v2 = d.centralityAlgorithmTest();
-    std::cout << abs(v.at(165) - v2.at(165)) << std::endl;
+    DataHandler d(input, true);
+    vector<double> v = d.centralityAlgorithm();
+    vector<double> v2 = d.centralityAlgorithmTest();
+    cout << abs(v.at(165) - v2.at(165)) << endl;
 
     REQUIRE( abs(v.at(165) - v2.at(165)) <= 0.001 );
 
@@ -327,10 +327,10 @@ TEST_CASE("PageRank Convergence of Steady State Vector", "[valgrind][weight=1]")
 
 TEST_CASE("Most Central Airport", "[valgrind][weight=1]") {
     cout << "Most Central Airport" << endl;
-    const string input = "data/compressed.txt";
+    const string input = "data/routes.csv";
 
     // read data from csv file
-    DataHandler d(input);
+    DataHandler d(input, true);
 
     pair<unsigned int, string> res = d.getCenter();
 
@@ -341,10 +341,10 @@ TEST_CASE("Most Central Airport", "[valgrind][weight=1]") {
 
 TEST_CASE("Least Central Airport", "[valgrind][weight=1]") {
     cout << "Least Central Airport" << endl;
-    const string input = "data/compressed.txt";
+    const string input = "data/routes.csv";
 
     // read data from csv file
-    DataHandler d(input);
+    DataHandler d(input, true);
 
     pair<unsigned int, string> res = d.getLeastCenter();
 
