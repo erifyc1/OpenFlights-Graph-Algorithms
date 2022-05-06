@@ -273,6 +273,58 @@ std::vector<double> DataHandler::centralityAlgorithm(){
     return steady_state;
 }
 
+std::vector<double> DataHandler::centralityAlgorithmTest(){
+    WeightedAdjacency w = getWeightedAdjacency();
+    Eigen::MatrixXd m(w.n, w.n);
+
+    for (int i = 0; i < (int)w.n; i++){
+        double colSum = 0;
+        for (int j = 0; j < (int)w.n; j++){
+            colSum += w.matrix.at(j).at(i);
+        }
+        for (int j = 0; j < (int)w.n; j++){
+            if (colSum != 0){
+                m(j,i) = (double)w.matrix.at(j).at(i)/colSum;
+            }
+            else{
+                m(j,i) = (1.00)/((double)(w.n));
+            }
+        }
+    }
+
+
+    // std::cout << m.col(2117) << std::endl;
+
+    Eigen::VectorXd start = Eigen::VectorXd::Zero(w.n);
+
+    for (int i = 0; i < (int)w.n; i++){
+        start(i) = (1.00)/((double)(w.n));
+    }
+
+    start = m * start;
+
+
+    for (int i = 0; i < 150; i++){
+        start = m * start;
+        // std::cout << std::endl;
+        // std::cout << "ORD " << start(2117) << std::endl;
+        // std::cout << "ATL " << start(165) << std::endl;
+        // std::cout << "Random " << start(10) << std::endl;
+        // std::cout << "Random2 " << start(1000) << std::endl;
+        // std::cout << std::endl;
+
+    }
+
+  
+    std::vector<double> steady_state;
+
+    for (int j = 0; j < (int)w.n; j++){
+        steady_state.push_back(start(j)); 
+    }
+
+    return steady_state;
+}
+
 // returns integer corresponding to the index of the most central airport
 
 pair<unsigned int, string> DataHandler::getCenter(){
