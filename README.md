@@ -1,4 +1,4 @@
-# Flight Analysis
+# OpenFlights Analysis with Graph Algorithms
 ## CS225 Final Project 
 ### by MiniGamerways
 - Andrew Elysee (aelys2)
