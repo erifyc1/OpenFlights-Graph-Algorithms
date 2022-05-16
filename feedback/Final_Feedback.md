@@ -26,9 +26,9 @@ A very clear README which succinctly describes all the necessary components.
 
 ## **Code** 
 ### Goals Grade
-Competent (100%)
+Sophisticated (100%)
 ### Execution Grade
-Competent (100%)
+Sophisticated (100%)
 ### Efficiency Grade
 Sophisticated (100%)
 ### Organization Grade
