@@ -40,3 +40,10 @@ Sufficient
 
 ### Comments:
 I think your group has made good progress on the project, as we had discussed during the check-in meeting. The remaining algorithms to be implemented hopefully shouldn't be too difficult for your group to complete. 
+
+
+## Week of 4/25 - 5/1
+
+
+### Grade
+Sufficient
